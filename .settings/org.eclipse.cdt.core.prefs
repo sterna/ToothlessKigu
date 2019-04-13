@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1421772622/PATH/delimiter=\:
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1421772622/PATH/operation=replace
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1421772622/PATH/value=/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin\:/usr/bin\:/bin\:/usr/sbin\:/sbin
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1421772622/append=true
+environment/project/ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug.1421772622/appendContributed=true

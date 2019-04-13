@@ -1,0 +1,1122 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+                              ./src/uart.o (symbol from plugin) (calloc)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+                              ./system/src/newlib/_sbrk.o (symbol from plugin) (__errno)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o) (_impure_ptr)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+                              ./src/uart.o (symbol from plugin) (free)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                              ./src/apa102.o (symbol from plugin) (memcpy)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+                              ./src/apa102.o (symbol from plugin) (memset)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o) (_calloc_r)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o) (_free_r)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o) (_malloc_r)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+                              ./src/utils.o (symbol from plugin) (rand)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o) (__malloc_lock)
+/usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+                              /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o) (__retarget_lock_acquire_recursive)
+
+Allocating common symbols
+Common symbol       size              file
+
+__lock___atexit_recursive_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+__lock___arc4random_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+xfunc_in            0x4               ./src/xprintf.o (symbol from plugin)
+ledFadeCh3          0x3c              ./src/ledPwm.o (symbol from plugin)
+errno               0x4               /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ledFadeCh1          0x3c              ./src/ledPwm.o (symbol from plugin)
+ledFadeCh4          0x3c              ./src/ledPwm.o (symbol from plugin)
+xfunc_out           0x4               ./src/xprintf.o (symbol from plugin)
+uartRxBuffer        0x14              ./src/uart.o (symbol from plugin)
+__lock___env_recursive_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+__lock___sinit_recursive_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+__lock___malloc_recursive_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+uartTxStringBuffer  0x32              ./src/uart.o (symbol from plugin)
+ledFadeCh2          0x3c              ./src/ledPwm.o (symbol from plugin)
+__lock___at_quick_exit_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ledFadeCh5          0x3c              ./src/ledPwm.o (symbol from plugin)
+__lock___dd_hash_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+__lock___tz_mutex   0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+__lock___sfp_recursive_mutex
+                    0x1               /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+
+Discarded input sections
+
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .group         0x0000000000000000        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .comment       0x0000000000000000     0x15aa /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .text          0x0000000000000000        0x0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data          0x0000000000000000        0x0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss           0x0000000000000000        0x0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x0000000000000000        0x4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+ .text.srand    0x0000000000000000       0x48 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+ .text          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .data          0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .bss           0x0000000000000000        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_init
+                0x0000000000000000        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_init_recursive
+                0x0000000000000000        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_close
+                0x0000000000000000        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_close_recursive
+                0x0000000000000000        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire
+                0x0000000000000000        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire
+                0x0000000000000000        0x4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire_recursive
+                0x0000000000000000        0x4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_release
+                0x0000000000000000        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000020000000 0x0000000000005000 xrw
+CCMRAM           0x0000000000000000 0x0000000000000000 xrw
+FLASH            0x0000000008000000 0x0000000000020000 xr
+FLASHB1          0x0000000000000000 0x0000000000000000 xr
+EXTMEMB0         0x0000000000000000 0x0000000000000000 xr
+EXTMEMB1         0x0000000000000000 0x0000000000000000 xr
+EXTMEMB2         0x0000000000000000 0x0000000000000000 xr
+EXTMEMB3         0x0000000000000000 0x0000000000000000 xr
+MEMORY_ARRAY     0x0000000000000000 0x0000000000000000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+LOAD /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libstdc++_nano.a
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libm.a
+START GROUP
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v7-m/nofp/libgcc.a
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a
+END GROUP
+START GROUP
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/thumb/v7-m/nofp/libgcc.a
+LOAD /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a
+END GROUP
+                0x0000000020005000                __stack = (ORIGIN (RAM) + LENGTH (RAM))
+                0x0000000020005000                _estack = __stack
+                0x0000000000000400                __Main_Stack_Size = 0x400
+                [!provide]                        PROVIDE (_Main_Stack_Size = __Main_Stack_Size)
+                0x0000000020004c00                __Main_Stack_Limit = (__stack - __Main_Stack_Size)
+                [!provide]                        PROVIDE (_Main_Stack_Limit = __Main_Stack_Limit)
+                0x0000000000000100                _Minimum_Stack_Size = 0x100
+                0x0000000020001540                PROVIDE (_Heap_Begin = _end_noinit)
+                0x0000000020004c00                PROVIDE (_Heap_Limit = (__stack - __Main_Stack_Size))
+
+.isr_vector     0x0000000008000000      0x26c
+ FILL mask 0xff
+                0x0000000008000000                __vectors_start = ABSOLUTE (.)
+                0x0000000008000000                __vectors_start__ = ABSOLUTE (.)
+ *(.isr_vector)
+ .isr_vector    0x0000000008000000      0x10c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                0x0000000008000000                __isr_vectors
+ *(.cfmconfig)
+ *(.after_vectors .after_vectors.*)
+ .after_vectors
+                0x000000000800010c      0x160 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                0x0000000008000160                UsageFault_Handler_C
+                0x0000000008000164                BusFault_Handler_C
+                0x0000000008000168                HardFault_Handler_C
+                0x000000000800016c                _start
+
+.inits          0x000000000800026c       0x28
+                0x000000000800026c                __data_regions_array_start = .
+                0x000000000800026c        0x4 LONG 0x800366c LOADADDR (.data)
+                0x0000000008000270        0x4 LONG 0x20000000 ADDR (.data)
+                0x0000000008000274        0x4 LONG 0x200000a4 (ADDR (.data) + SIZEOF (.data))
+                0x0000000008000278        0x4 LONG 0x800366c LOADADDR (.data_CCMRAM)
+                0x000000000800027c        0x4 LONG 0x0 ADDR (.data_CCMRAM)
+                0x0000000008000280        0x4 LONG 0x0 (ADDR (.data_CCMRAM) + SIZEOF (.data_CCMRAM))
+                0x0000000008000284                __data_regions_array_end = .
+                0x0000000008000284                __bss_regions_array_start = .
+                0x0000000008000284        0x4 LONG 0x200000a4 ADDR (.bss)
+                0x0000000008000288        0x4 LONG 0x20001540 (ADDR (.bss) + SIZEOF (.bss))
+                0x000000000800028c        0x4 LONG 0x0 ADDR (.bss_CCMRAM)
+                0x0000000008000290        0x4 LONG 0x0 (ADDR (.bss_CCMRAM) + SIZEOF (.bss_CCMRAM))
+                0x0000000008000294                __bss_regions_array_end = .
+ *(.init)
+ *(.fini)
+                0x0000000008000294                . = ALIGN (0x4)
+                0x0000000008000294                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array_sysinit .preinit_array_sysinit.*)
+ *(.preinit_array_platform .preinit_array_platform.*)
+ *(.preinit_array .preinit_array.*)
+                0x0000000008000294                PROVIDE (__preinit_array_end = .)
+                0x0000000008000294                . = ALIGN (0x4)
+                0x0000000008000294                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                0x0000000008000294                PROVIDE (__init_array_end = .)
+                0x0000000008000294                . = ALIGN (0x4)
+                0x0000000008000294                PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                0x0000000008000294                PROVIDE (__fini_array_end = .)
+
+.flashtext
+ *(.flashtext .flashtext.*)
+
+.text           0x0000000008000294     0x33d8
+ *(.text .text.*)
+ .text.utilSign
+                0x0000000008000294        0xe /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilBounceValue
+                0x00000000080002a2       0x42 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilLoopValue
+                0x00000000080002e4       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilIncWithDir
+                0x0000000008000300       0x26 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x0000000008000326        0x2 
+ .text.microSeconds
+                0x0000000008000328       0x34 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SysTick_Handler
+                0x000000000800035c       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.getSwRaw
+                0x000000000800036c       0xa4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.swGetFallingEdge
+                0x0000000008000410       0x14 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.swGetRisingEdge
+                0x0000000008000424       0x14 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.swGetState
+                0x0000000008000438       0x18 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.swDebounceTask
+                0x0000000008000450       0xbc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.checkCycleCounterU16
+                0x000000000800050c       0x18 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.checkCycleCounter
+                0x0000000008000524       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.pulseCalcColourPerLed
+                0x000000000800053a       0x7e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegExists
+                0x00000000080005b8       0x14 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.fadeCalcColour
+                0x00000000080005cc      0x190 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegRestart
+                0x000000000800075c       0x9c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegSetPulseActiveState
+                0x00000000080007f8       0x24 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.isValidStrip
+                0x000000000800081c       0x18 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102IsValidPixel
+                0x0000000008000834       0x2c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.pixelNeedsUpdate
+                0x0000000008000860       0x54 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102DMABusy
+                0x00000000080008b4       0x3c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102SetPixelWithGlobal
+                0x00000000080008f0       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.pulseCalcAndSet
+                0x0000000008000948      0x218 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102SetDefaultGlobal
+                0x0000000008000b60       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102SetPixel
+                0x0000000008000b70       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102FillRange
+                0x0000000008000bc8       0x64 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SetSysClockTo72
+                0x0000000008000c2c       0xc4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SetSysClock
+                0x0000000008000cf0        0x8 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SystemCoreClockUpdate
+                0x0000000008000cf8       0x94 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SystemInit
+                0x0000000008000d8c       0x50 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.__initialize_hardware
+                0x0000000008000ddc        0x8 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.__initialize_hardware_early
+                0x0000000008000de4       0x18 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.__initialize_args
+                0x0000000008000dfc       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text._exit    0x0000000008000e0c        0x2 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.abort    0x0000000008000e0e        0x8 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.assert_failed
+                0x0000000008000e16        0x6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.USART_GetFlagStatus
+                0x0000000008000e1c       0xac /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.USART_SendData
+                0x0000000008000ec8       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.uartPutc
+                0x0000000008000f20       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.uartSendString
+                0x0000000008000f3c       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x0000000008000f52        0x2 
+ .text.USART_DMACmd
+                0x0000000008000f54       0x78 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.USART_Cmd
+                0x0000000008000fcc       0x68 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.USART_ClockInit
+                0x0000000008001034       0xa4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SPI_SSOutputCmd
+                0x00000000080010d8       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SPI_I2S_DMACmd
+                0x0000000008001130       0x68 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SPI_Cmd  0x0000000008001198       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.SPI_Init
+                0x00000000080011f0      0x138 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.RCC_APB1PeriphClockCmd
+                0x0000000008001328       0x4c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.RCC_APB2PeriphClockCmd
+                0x0000000008001374       0x4c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilSetClockUSART
+                0x00000000080013c0       0x74 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilSetClockSPI
+                0x0000000008001434       0x48 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilSetClockGPIO
+                0x000000000800147c       0x80 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.RCC_AHBPeriphClockCmd
+                0x00000000080014fc       0x4c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilSetClockDMA
+                0x0000000008001548       0x68 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.RCC_GetClocksFreq
+                0x00000000080015b0       0xbc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.timeInit
+                0x000000000800166c       0x68 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.USART_Init
+                0x00000000080016d4      0x1b4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.GPIO_Init
+                0x0000000008001888      0x134 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.swInit   0x00000000080019bc       0x68 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_ClearFlag
+                0x0000000008001a24       0x40 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_GetFlagStatus
+                0x0000000008001a64      0x16c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_SetCurrDataCounter
+                0x0000000008001bd0       0x68 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_ITConfig
+                0x0000000008001c38       0x9c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_Cmd  0x0000000008001cd4       0x8c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA1_Channel7_IRQHandler
+                0x0000000008001d60       0x44 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA1_Channel5_IRQHandler
+                0x0000000008001da4       0x44 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA1_Channel3_IRQHandler
+                0x0000000008001de8       0x44 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102UpdateStrip
+                0x0000000008001e2c       0xa0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegRunIteration
+                0x0000000008001ecc      0x12c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.poorMansOS
+                0x0000000008001ff8       0x50 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_Init
+                0x0000000008002048      0x16c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA_DeInit
+                0x00000000080021b4      0x180 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ADC_ClearITPendingBit
+                0x0000000008002334       0x4c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ADC1_2_IRQHandler
+                0x0000000008002380       0x74 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.NVIC_Init
+                0x00000000080023f4       0x98 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.utilRandRange
+                0x000000000800248c       0x1a /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000080024a6        0x2 
+ .text.loadLedSegPulseColour
+                0x00000000080024a8       0x70 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.loadLedSegFadeColour
+                0x0000000008002518       0x94 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.DMA1_Channel4_IRQHandler
+                0x00000000080025ac       0x5c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegSetPulse
+                0x0000000008002608       0x94 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegSetFade
+                0x000000000800269c      0x174 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegInitSegment
+                0x0000000008002810       0xa4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegGetState
+                0x00000000080028b4       0x28 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegClearPulse
+                0x00000000080028dc       0x36 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.ledSegClearFade
+                0x0000000008002912       0x42 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.uartSendStringDMA
+                0x0000000008002954       0x78 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.USART1_IRQHandler
+                0x00000000080029cc      0x1e0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.apa102Init
+                0x0000000008002bac      0x288 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text.main     0x0000000008002e34      0x318 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .text._sbrk    0x000000000800314c       0x44 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                0x000000000800314c                _sbrk
+ .text.calloc   0x0000000008003190       0x10 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+                0x0000000008003190                calloc
+ .text.__errno  0x00000000080031a0        0xc /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+                0x00000000080031a0                __errno
+ .text.malloc   0x00000000080031ac       0x10 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+                0x00000000080031ac                malloc
+ .text.free     0x00000000080031bc       0x10 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+                0x00000000080031bc                free
+ .text.memcpy   0x00000000080031cc       0x1c /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                0x00000000080031cc                memcpy
+ .text.memset   0x00000000080031e8       0x10 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+                0x00000000080031e8                memset
+ .text._calloc_r
+                0x00000000080031f8       0x1c /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+                0x00000000080031f8                _calloc_r
+ .text._free_r  0x0000000008003214       0x98 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+                0x0000000008003214                _free_r
+ .text._malloc_r
+                0x00000000080032ac       0xb4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+                0x00000000080032ac                _malloc_r
+ .text.rand     0x0000000008003360       0x68 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+                0x0000000008003360                rand
+ .text._sbrk_r  0x00000000080033c8       0x20 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+                0x00000000080033c8                _sbrk_r
+ .text.__malloc_lock
+                0x00000000080033e8        0xc /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+                0x00000000080033e8                __malloc_lock
+ .text.__malloc_unlock
+                0x00000000080033f4        0xc /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+                0x00000000080033f4                __malloc_unlock
+ .text.__retarget_lock_acquire_recursive
+                0x0000000008003400        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+                0x0000000008003400                __retarget_lock_acquire_recursive
+ .text.__retarget_lock_release_recursive
+                0x0000000008003402        0x2 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+                0x0000000008003402                __retarget_lock_release_recursive
+ *(.rodata .rodata.* .constdata .constdata.*)
+ .rodata.ADC_ClearITPendingBit.str1.4
+                0x0000000008003404       0x30 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .rodata.DMA_ClearFlag.str1.4
+                0x0000000008003434       0x30 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .rodata.GPIO_Init.str1.4
+                0x0000000008003464       0x31 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x0000000008003495        0x3 
+ .rodata.NVIC_Init.str1.4
+                0x0000000008003498       0x27 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000080034bf        0x1 
+ .rodata.RCC_APB1PeriphClockCmd.str1.4
+                0x00000000080034c0       0x30 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .rodata.SPI_SSOutputCmd.str1.4
+                0x00000000080034f0       0x30 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .rodata.USART1_IRQHandler.str1.4
+                0x0000000008003520       0x1b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x000000000800353b        0x1 
+ .rodata.USART_GetFlagStatus.str1.4
+                0x000000000800353c       0x34 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                                         0x32 (size before relaxing)
+ .rodata.setting_disco
+                0x0000000008003570       0xfc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *(vtable)
+ *(.eh_frame*)
+ *(.glue_7)
+ .glue_7        0x000000000800366c        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x000000000800366c        0x0 linker stubs
+
+.vfp11_veneer   0x000000000800366c        0x0
+ .vfp11_veneer  0x000000000800366c        0x0 linker stubs
+
+.v4_bx          0x000000000800366c        0x0
+ .v4_bx         0x000000000800366c        0x0 linker stubs
+
+.iplt           0x000000000800366c        0x0
+ .iplt          0x000000000800366c        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+
+.rel.dyn        0x000000000800366c        0x0
+ .rel.iplt      0x000000000800366c        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x000000000800366c                . = ALIGN (0x4)
+                0x000000000800366c                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x000000000800366c                __exidx_end = .
+                0x000000000800366c                . = ALIGN (0x4)
+                0x000000000800366c                _etext = .
+                0x000000000800366c                __etext = .
+
+.data_CCMRAM    0x0000000000000000        0x0 load address 0x000000000800366c
+ FILL mask 0xff
+ *(.data.CCMRAM .data.CCMRAM.*)
+                0x0000000000000000                . = ALIGN (0x4)
+                0x000000000800366c                _sidata = LOADADDR (.data)
+
+.data           0x0000000020000000       0xa4 load address 0x000000000800366c
+ FILL mask 0xff
+                0x0000000020000000                _sdata = .
+                0x0000000020000000                __data_start__ = .
+ *(.data_begin .data_begin.*)
+ .data_begin    0x0000000020000000        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *(.data .data.*)
+ .data.ADCPrescTable
+                0x0000000020000004        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data.AHBPrescTable
+                0x0000000020000008       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data.APBAHBPrescTable
+                0x0000000020000018       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data.SystemCoreClock
+                0x0000000020000028        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data.argv.6858
+                0x000000002000002c        0x8 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data.defaultGlobal
+                0x0000000020000034        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x0000000020000035        0x3 ff
+ .data.ticksPerUs
+                0x0000000020000038        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .data._impure_ptr
+                0x000000002000003c        0x4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+                0x000000002000003c                _impure_ptr
+ .data.impure_data
+                0x0000000020000040       0x60 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+ *(.data_end .data_end.*)
+ .data_end      0x00000000200000a0        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                0x00000000200000a4                . = ALIGN (0x4)
+                0x00000000200000a4                _edata = .
+                0x00000000200000a4                __data_end__ = .
+
+.igot.plt       0x00000000200000a4        0x0 load address 0x0000000008003710
+ .igot.plt      0x00000000200000a4        0x0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+
+.bss_CCMRAM     0x0000000000000000        0x0
+ *(.bss.CCMRAM .bss.CCMRAM.*)
+
+.bss            0x00000000200000a4     0x149c
+                0x00000000200000a4                __bss_start__ = .
+                0x00000000200000a4                _sbss = .
+ *(.bss_begin .bss_begin.*)
+ .bss_begin     0x00000000200000a4        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *(.bss .bss.*)
+ .bss.DMABuffer
+                0x00000000200000a8        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.DMABusy   0x00000000200000ac        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000ad        0x3 
+ .bss.DMABusy.lto_priv.0
+                0x00000000200000b0        0x3 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000b3        0x1 
+ .bss.adcFilteredVals
+                0x00000000200000b4        0x6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000ba        0x2 
+ .bss.adcRawBuffer
+                0x00000000200000bc        0x6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000c2        0x2 
+ .bss.adcRawTotal
+                0x00000000200000c4        0xc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.calcCycle.7393
+                0x00000000200000d0        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000d1        0x3 
+ .bss.currentNofPixels
+                0x00000000200000d4        0x6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.currentNofSegments
+                0x00000000200000da        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.currentSeg.7394
+                0x00000000200000db        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.current_heap_end.4004
+                0x00000000200000dc        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.dataCounter.7246
+                0x00000000200000e0        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.mutex     0x00000000200000e1        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000e2        0x2 
+ .bss.name.6857
+                0x00000000200000e4        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000e5        0x3 
+ .bss.newData   0x00000000200000e8        0x3 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200000eb        0x1 
+ .bss.nextCallTime.6952
+                0x00000000200000ec        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.nextCallTime.7392
+                0x00000000200000f0        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.pixels    0x00000000200000f4      0x978 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.sampleNr.6932
+                0x0000000020000a6c        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.segmentTail
+                0x0000000020000a6d        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x0000000020000a6e        0x2 
+ .bss.segments  0x0000000020000a70      0xa50 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.switches  0x00000000200014c0       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.systemTime
+                0x00000000200014d0        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.task.8776
+                0x00000000200014d4        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.uartCurrentCmd
+                0x00000000200014d5        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.uartDMAGotError
+                0x00000000200014d6        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.uartLastByte
+                0x00000000200014d7        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.uartRxBuffer
+                0x00000000200014d8       0x14 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .bss.uartStatus
+                0x00000000200014ec        0x1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x00000000200014ed        0x3 
+ .bss.uartTxStringBuffer
+                0x00000000200014f0       0x32 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ *fill*         0x0000000020001522        0x2 
+ .bss.__malloc_free_list
+                0x0000000020001524        0x4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+                0x0000000020001524                __malloc_free_list
+ .bss.__malloc_sbrk_start
+                0x0000000020001528        0x4 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+                0x0000000020001528                __malloc_sbrk_start
+ *(COMMON)
+ COMMON         0x000000002000152c        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                0x000000002000152c                errno
+ COMMON         0x0000000020001530        0x9 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+                0x0000000020001530                __lock___atexit_recursive_mutex
+                0x0000000020001531                __lock___arc4random_mutex
+                0x0000000020001532                __lock___env_recursive_mutex
+                0x0000000020001533                __lock___sinit_recursive_mutex
+                0x0000000020001534                __lock___malloc_recursive_mutex
+                0x0000000020001535                __lock___at_quick_exit_mutex
+                0x0000000020001536                __lock___dd_hash_mutex
+                0x0000000020001537                __lock___tz_mutex
+                0x0000000020001538                __lock___sfp_recursive_mutex
+ *(.bss_end .bss_end.*)
+ *fill*         0x0000000020001539        0x3 
+ .bss_end       0x000000002000153c        0x4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                0x0000000020001540                . = ALIGN (0x4)
+                0x0000000020001540                __bss_end__ = .
+                0x0000000020001540                _ebss = .
+
+.noinit_CCMRAM
+ *(.noinit.CCMRAM .noinit.CCMRAM.*)
+
+.noinit         0x0000000020001540        0x0
+                0x0000000020001540                _noinit = .
+ *(.noinit .noinit.*)
+                0x0000000020001540                . = ALIGN (0x4)
+                0x0000000020001540                _end_noinit = .
+                [!provide]                        PROVIDE (end = _end_noinit)
+                [!provide]                        PROVIDE (_end = _end_noinit)
+                [!provide]                        PROVIDE (__end = _end_noinit)
+                [!provide]                        PROVIDE (__end__ = _end_noinit)
+
+._check_stack   0x0000000020001540      0x100
+                0x0000000020001640                . = (. + _Minimum_Stack_Size)
+ *fill*         0x0000000020001540      0x100 
+
+.b1text
+ *(.b1text)
+ *(.b1rodata)
+ *(.b1rodata.*)
+
+.eb0text
+ *(.eb0text)
+ *(.eb0rodata)
+ *(.eb0rodata.*)
+
+.eb1text
+ *(.eb1text)
+ *(.eb1rodata)
+ *(.eb1rodata.*)
+
+.eb2text
+ *(.eb2text)
+ *(.eb2rodata)
+ *(.eb2rodata.*)
+
+.eb3text
+ *(.eb3text)
+ *(.eb3rodata)
+ *(.eb3rodata.*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x75
+ *(.comment)
+ .comment       0x0000000000000000       0x75 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                                         0x76 (size before relaxing)
+
+.ARM.attributes
+                0x0000000000000000       0x2d
+ .ARM.attributes
+                0x0000000000000000       0x2b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .ARM.attributes
+                0x000000000000002b       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+ .ARM.attributes
+                0x0000000000000058       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+ .ARM.attributes
+                0x0000000000000085       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000000000b2       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+ .ARM.attributes
+                0x00000000000000df       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x000000000000010c       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000139       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+ .ARM.attributes
+                0x0000000000000166       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+ .ARM.attributes
+                0x0000000000000193       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+ .ARM.attributes
+                0x00000000000001c0       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+ .ARM.attributes
+                0x00000000000001ed       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x000000000000021a       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x0000000000000247       0x2d /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000      0x360
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000      0x360 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x0000000000000000    0x1b84d
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000    0x184de /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+                0x0000000000000000                misc.c.f6159cea
+                0x000000000000051a                stm32f10x_adc.c.50594876
+                0x0000000000000e97                stm32f10x_bkp.c.a89fda7a
+                0x00000000000015fb                stm32f10x_can.c.6436695f
+                0x0000000000002076                stm32f10x_cec.c.2f7cd99d
+                0x00000000000023e8                stm32f10x_crc.c.755928b0
+                0x0000000000002595                stm32f10x_dac.c.a028f88f
+                0x000000000000299b                stm32f10x_dbgmcu.c.4adf6328
+                0x0000000000002ae3                stm32f10x_dma.c.0a8d01b9
+                0x0000000000002edf                stm32f10x_exti.c.a9f6316b
+                0x00000000000031f7                stm32f10x_flash.c.a4d5bda7
+                0x0000000000003856                stm32f10x_fsmc.c.07fd9c0c
+                0x00000000000040a4                stm32f10x_gpio.c.16069d3e
+                0x00000000000046a9                stm32f10x_i2c.c.9dcb606c
+                0x0000000000004feb                stm32f10x_iwdg.c.463bbc25
+                0x000000000000519c                stm32f10x_pwr.c.f58f47ef
+                0x00000000000055a1                stm32f10x_rcc.c.985a6a1a
+                0x0000000000005cab                stm32f10x_rtc.c.839f1bb9
+                0x0000000000006047                stm32f10x_sdio.c.cfd670b5
+                0x000000000000670a                stm32f10x_spi.c.ccb53d89
+                0x0000000000006ecf                stm32f10x_tim.c.55a25abb
+                0x0000000000008622                stm32f10x_usart.c.f791acbe
+                0x0000000000008e82                stm32f10x_wwdg.c.5b0e012b
+                0x0000000000009056                g_cxx.cpp.1ac53470
+                0x000000000000a0ad                g_exit.c.b606976f
+                0x000000000000aa50                g_sbrk.c.9f85b275
+                0x000000000000b3e3                g_startup.c.7d240082
+                0x000000000000b622                g_syscalls.c.249ee0ed
+                0x000000000000c088                assert.c.04bee2b5
+                0x000000000000ca8d                Trace.c.028ce302
+                0x000000000000caae                trace_impl.c.4f3d931b
+                0x000000000000cacf                g_initialize_hardware.c.d12d9678
+                0x000000000000cd55                g_reset_hardware.c.eca80945
+                0x000000000000cfe2                exception_handlers.c.e9604cba
+                0x000000000000dac2                system_stm32f10x.c.d08e8ef0
+                0x000000000000df30                vectors_stm32f10x.c.8d0ad8ba
+                0x000000000000dfe6                g_write.c.e0971f6b
+                0x000000000000e007                adc.c.e052c8ce
+                0x000000000000efcf                apa102.c.52623191
+                0x0000000000010579                ledPwm.c.beefe64e
+                0x0000000000011692                ledSegment.c.d6f5b2de
+                0x000000000001295d                main.c.3b7d4561
+                0x0000000000013dda                sw.c.cd3ebfaf
+                0x00000000000149d0                time.c.590dc5b4
+                0x00000000000150ee                uart.c.688793e4
+                0x00000000000162a4                utils.c.1c776bba
+                0x00000000000177b0                xprintf.c.45ea06c2
+ .debug_info    0x00000000000184de     0x336f /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+
+.debug_abbrev   0x0000000000000000     0x515d
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000     0x4ff1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_abbrev  0x0000000000004ff1      0x16c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+
+.debug_line     0x0000000000000000     0xd6d1
+ *(.debug_line)
+ .debug_line    0x0000000000000000     0xa5d3 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_line    0x000000000000a5d3     0x30fe /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+
+.debug_frame    0x0000000000000000      0xd3c
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000      0xaa0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+ .debug_frame   0x0000000000000aa0       0x20 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-calloc.o)
+ .debug_frame   0x0000000000000ac0       0x20 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-errno.o)
+ .debug_frame   0x0000000000000ae0       0x30 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-malloc.o)
+ .debug_frame   0x0000000000000b10       0x28 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000b38       0x20 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000b58       0x2c /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-callocr.o)
+ .debug_frame   0x0000000000000b84       0x38 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000000bbc       0x30 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000000bec       0x44 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-rand.o)
+ .debug_frame   0x0000000000000c30       0x2c /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000000c5c       0x30 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000000c8c       0xb0 /usr/local/gcc-arm-none-eabi-8-2018-q4-major/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libg_nano.a(lib_a-lock.o)
+
+.debug_str      0x0000000000000000    0x62b2a
+ *(.debug_str)
+ .debug_str     0x0000000000000000    0x629f4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+                                     0xbc889a (size before relaxing)
+ .debug_str     0x00000000000629f4      0x136 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+                                        0x162 (size before relaxing)
+
+.debug_loc      0x0000000000000000     0x3a5b
+ *(.debug_loc)
+ .debug_loc     0x0000000000000000     0x3a5b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+OUTPUT(test2.elf elf32-littlearm)
+
+.debug_macro    0x0000000000000000    0x185f4
+ .debug_macro   0x0000000000000000     0x5507 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000005507      0xa96 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000005f9d       0x50 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000005fed      0x34e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000633b       0x35 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000006370       0x34 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000063a4      0xb8e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000006f32     0x7dbe /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000ecf0      0x2e4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000efd4      0x144 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000f118      0x3cf /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000f4e7       0xc8 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000f5af      0x17a /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000f729       0xac /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000f7d5      0x3ad /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000fb82       0x9d /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000fc1f      0x2cf /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000000feee      0x279 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000010167      0x2ac /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000010413      0x2b4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000106c7       0x64 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001072b       0x82 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000107ad      0x3e2 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000010b8f       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000010be7      0x344 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000010f2b      0x2c4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000111ef      0x711 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011900      0x222 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011b22       0x34 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011b56       0x35 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011b8b       0x85 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011c10      0x13e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011d4e       0x8b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000011dd9      0x3c9 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000121a2       0xc2 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000012264      0x174 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000123d8       0xa6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001247e      0x3a7 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000012825       0x97 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000128bc      0x2c9 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000012b85      0x273 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000012df8      0x2a6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001309e      0x2ae /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001334c       0x5e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000133aa       0x7c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000013426      0x3dc /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000013802       0x52 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000013854      0x33e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000013b92      0x2be /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000013e50      0x70b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001455b      0x21c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000014777       0x2e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000147a5      0xb38 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000152dd      0x16f /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001544c       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001545c      0x3f4 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015850       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015860       0x18 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015878       0x22 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001589a       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000158f2       0x94 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015986       0x35 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000159bb       0x34 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000159ef       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015a05      0x10e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015b13       0x94 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015ba7       0x57 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015bfe       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015c56       0x1f /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015c75       0x43 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015cb8       0x20 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015cd8      0x18e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000015e66      0x35c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000161c2       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000161d8       0x29 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016201       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001621d       0xde /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000162fb       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001630b       0x6a /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016375       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016391       0x52 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000163e3       0x40 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016423       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016433       0x40 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016473       0xd7 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001654a       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016566       0x3d /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000165a3       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000165b9       0x35 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000165ee      0x51a /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016b08       0x34 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016b3c      0x10e /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016c4a       0x8d /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016cd7       0x43 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000016d1a      0x339 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017053       0x35 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017088      0x174 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000171fc       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001720c      0x23b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017447       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017463      0x122 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017585       0x88 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001760d       0x7c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017689       0x17 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000176a0      0x118 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000177b8      0x189 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017941       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017957       0x1c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017973       0x3b /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000179ae       0x22 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000179d0       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000179e0       0xcf /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017aaf       0xbe /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017b6d       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017b7d       0x22 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017b9f       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017baf       0x76 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017c25      0x10c /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017d31       0x70 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017da1       0xa6 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017e47       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017e5d       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017e73       0x97 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000017f0a       0xfd /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000018007       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000018017       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001802d      0x16f /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x000000000001819c       0x10 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000181ac       0x40 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000181ec       0x16 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000018202       0xa0 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000182a2       0x58 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x00000000000182fa      0x119 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+ .debug_macro   0x0000000000018413      0x1e1 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccGRVTuGdebugobj
+
+.debug_ranges   0x0000000000000000      0x400
+ .debug_ranges  0x0000000000000000      0x400 /var/folders/nq/bnxjc_6d7gx07pjzj3nff9s00000gn/T//ccq7jiNO.ltrans0.ltrans.o
