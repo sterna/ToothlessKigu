@@ -1,0 +1,10 @@
+.project
+.cproject
+.classpath
+.settings/
+.metadata/
+*.o
+*.d
+*.mk
+*.elf
+*.map

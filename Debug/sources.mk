@@ -27,5 +27,12 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+ledSegment/src \
+ledSegment/stm32utils/src \
+ledSegment/stm32utils/system/src/cmsis \
+ledSegment/stm32utils/system/src/cortexm \
+ledSegment/stm32utils/system/src/diag \
+ledSegment/stm32utils/system/src/newlib \
+ledSegment/stm32utils/system/src/stm32f1-stdperiph \
 src \
 

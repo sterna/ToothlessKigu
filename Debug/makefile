@@ -9,6 +9,13 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
+-include ledSegment/stm32utils/system/src/stm32f1-stdperiph/subdir.mk
+-include ledSegment/stm32utils/system/src/newlib/subdir.mk
+-include ledSegment/stm32utils/system/src/diag/subdir.mk
+-include ledSegment/stm32utils/system/src/cortexm/subdir.mk
+-include ledSegment/stm32utils/system/src/cmsis/subdir.mk
+-include ledSegment/stm32utils/src/subdir.mk
+-include ledSegment/src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
