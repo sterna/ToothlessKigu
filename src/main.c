@@ -14,6 +14,9 @@
 #include "apa102.h"
 #include "utils.h"
 #include "ledSegment.h"
+#include "mpu6050.h"
+#include "extFetCtrl.h"
+#include "onboardLedCtrl.h"
 
 bool poorMansOS();
 void poorMansOSRunAll();
@@ -66,11 +69,6 @@ typedef enum
 	DISCO_COL_OFF,
 	DISCO_COL_NOF_COLOURS
 }discoCols_t;
-
-void generateColor(led_fade_setting_t* s);
-void loadMode(prog_mode_t mode);
-void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st);
-void loadLedSegPulseColour(discoCols_t col,ledSegmentPulseSetting_t* st);
 
 #define DISCO_NOF_COLORS	(DISCO_COL_NOF_COLOURS-2)
 /*
@@ -151,6 +149,12 @@ typedef enum
 	SMODE_NOF_MODES
 }simpleModes_t;
 
+void generateColor(led_fade_setting_t* s);
+void loadMode(prog_mode_t mode);
+void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st);
+void loadLedSegPulseColour(discoCols_t col,ledSegmentPulseSetting_t* st);
+static void dummyLedTask();
+
 //Sets if the program goes into the staff
 #define STAFF	1
 #define GLOBAL_SETTING	6
@@ -166,25 +170,51 @@ uint8_t segmentArmRight=0;
 uint8_t segmentHead=0;
 uint8_t segmentTail=0;
 
+static volatile IMUVals_t imuVals;
+
 int main(int argc, char* argv[])
 {
 	SystemCoreClockUpdate();
 	timeInit();
 	swInit();
-
-	//Init onboard LED
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
-	GPIO_InitStruct.GPIO_Speed= GPIO_Speed_2MHz;
-	GPIO_InitStruct.GPIO_Pin= GPIO_Pin_13;
-	GPIO_Init(GPIOC,&GPIO_InitStruct);
-
-	apa102Init(1,NOF_LEDS);
-	//apa102Init(2,NOF_LEDS);
-	//apa102Init(3,NOF_LEDS);
+	//extFetInit();
+	//onboardLedCtrlInit();
+	apa102Init(1,5);
 	apa102SetDefaultGlobal(GLOBAL_SETTING);
 	apa102UpdateStrip(APA_ALL_STRIPS);
+	ledSegmentPulseSetting_t pulse2;
+	loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse2);
+	pulse2.cycles =0;
+	pulse2.ledsFadeAfter = 1;
+	pulse2.ledsFadeBefore = 1;
+	pulse2.ledsMaxPower = 2;
+	pulse2.mode = LEDSEG_MODE_LOOP_END;
+	pulse2.pixelTime = 10;
+	pulse2.pixelsPerIteration = 1;
+	pulse2.startDir =1;
+	pulse2.startLed = 1;
+	ledSegmentFadeSetting_t fade2;
+	loadLedSegFadeColour(DISCO_COL_BLUE,&fade2);
+	fade2.cycles =0;
+	fade2.mode = LEDSEG_MODE_BOUNCE;
+	fade2.startDir = -1;
+	fade2.fadeTime = 700;
+	segmentTail=ledSegInitSegment(1,1,5,&pulse2,&fade2);
+	//mpu6050Init();
+
+	static uint32_t nextCall=0;
+
+	while(1)
+	{
+		poorMansOS();
+		if(systemTime>nextCall)
+		{
+			nextCall=systemTime+300;
+			//mpu6050GetAllValuesStruct(&imuVals,false);
+		}
+	}
+
+
 
 	//Ugly program "Full patte!", Which just sets all LEDs to max and then waits
 /*	apa102FillStrip(1,255,255,255,APA_MAX_GLOBAL_SETTING);
@@ -368,110 +398,64 @@ int main(int argc, char* argv[])
 			}
 		}
 	}	//End of simple main loop mode handling
-
-	//Test program for testing strips
-	fade.fadeTime = 500;
-	uint32_t colourChangeTime=0;
-	colour_t col=COL_RED;
-	while(1)
-	{
-		LED_BOARD_TOGGLE();
-		poorMansOS();
-
-		if(systemTime>colourChangeTime)
-		{
-			colourChangeTime=systemTime+500;
-			switch(col)
-			{
-				case COL_RED:
-				{
-					fade.g_max=0;
-					fade.g_min=0;
-					fade.r_max=150;
-					fade.r_min=50;
-					fade.b_min=0;
-					fade.b_max=0;
-					col=COL_GREEN;
-					break;
-				}
-				case COL_GREEN:
-				{
-					fade.g_max=150;
-					fade.g_min=50;
-					fade.r_max=0;
-					fade.r_min=0;
-					fade.b_min=0;
-					fade.b_max=0;
-					col=COL_BLUE;
-					break;
-				}
-				case COL_BLUE:
-				{
-					fade.g_max=0;
-					fade.g_min=0;
-					fade.r_max=0;
-					fade.r_min=0;
-					fade.b_max=150;
-					fade.b_min=50;
-					col=COL_RED;
-					break;
-				}
-			}
-			ledSegSetFade(segmentTail,&fade);
-		}
-	}
-
-	volatile uint8_t red=20;
-	volatile uint8_t redStrong=60;
-	volatile uint8_t gr=0;
-	volatile uint8_t grStrong=60;
-	volatile uint8_t bl=20;
-	volatile uint8_t blStrong=0;
-	apa102FillStrip(1,red,gr,bl,APA_MAX_GLOBAL_SETTING/2);
-	uint8_t led=1;
-	volatile uint32_t del=40;
-	int8_t dir2=1;
-	while(0)
-	{
-		red+=dir2;
-		bl+=dir2;
-		if(bl>blStrong || bl<20)
-		{
-			dir2=dir2*-1;
-		}
-		apa102FillStrip(1,red,gr,bl,APA_MAX_GLOBAL_SETTING/2);
-		apa102UpdateStrip(1);
-		while(apa102DMABusy(1)){}
-		LED_BOARD_TOGGLE();
-		delay_ms(del);
-	}
-	while(1)
-	{
-		apa102SetPixel(1,led,redStrong,grStrong,blStrong,false);
-		apa102SetPixel(1,led+1,redStrong,grStrong,blStrong,false);
-		apa102SetPixel(1,led+2,redStrong,grStrong,blStrong,false);
-		apa102SetPixel(1,led+3,redStrong,grStrong,blStrong,false);
-		apa102SetPixel(2,led,0,50,blStrong,false);
-		apa102SetPixel(2,led+1,0,50,blStrong,false);
-		apa102SetPixel(3,led,50,50,0,false);
-		apa102SetPixel(3,led+1,50,50,0,false);
-		apa102UpdateStrip(1);
-		apa102UpdateStrip(2);
-		apa102UpdateStrip(3);
-		while(apa102DMABusy(1) || apa102DMABusy(2) || apa102DMABusy(3)){}
-		apa102SetPixel(1,led,red,gr,bl,false);
-		apa102SetPixel(2,led,red,gr,bl,false);
-		apa102SetPixel(3,led,red,gr,bl,false);
-		delay_ms(del);
-		led++;
-		if(led>NOF_LEDS)
-		{
-			led=0;
-		}
-		LED_BOARD_TOGGLE();
-	}
-
 }	//End of main()
+
+
+#define LED_DUMMY_NOF_STATES	4
+/*
+ * Dummy task to blink LEDs
+ */
+static void dummyLedTask()
+{
+	static uint32_t nextCallTime=0;
+	static uint8_t state=0;
+	//This is a debug thingy, to test the LED
+	volatile S_RGB_LED led;
+	led.red=500;
+	led.green=0;
+	led.blue=0;
+	if(systemTime>nextCallTime)
+	{
+		nextCallTime=systemTime+250;
+		switch(state)
+		{
+			case 0:
+			{
+				led.red=0;
+				led.green=0;
+				led.blue=0;
+				break;
+			}
+			case 1:
+			{
+				led.red=500;
+				led.green=0;
+				led.blue=0;
+				break;
+			}
+			case 2:
+			{
+				led.red=0;
+				led.green=500;
+				led.blue=0;
+				break;
+			}
+			case 3:
+			{
+				led.red=0;
+				led.green=0;
+				led.blue=500;
+				break;
+			}
+		}
+		onboardLedCtrlWriteColours(led);
+		state++;
+		if(state>=LED_DUMMY_NOF_STATES)
+		{
+			state=0;
+		}
+	}
+}
 
 #define MAX_DIVISOR	4
 #define MIN_MAX_DIVISOR	3
@@ -763,7 +747,7 @@ void loadMode(prog_mode_t mode)
 }
 
 static volatile bool mutex=false;
-#define OS_NOF_TASKS 2
+#define OS_NOF_TASKS 4
 /*
  * Semi-OS, used for tasks that are not extremely time critical and might take a while to perform
  */
@@ -784,7 +768,10 @@ bool poorMansOS()
 			swDebounceTask();
 		break;
 		case 2:
-			//handleModes();
+			dummyLedTask();
+		break;
+		case 3:
+			mpu6050Process();
 		break;
 	}
 	task++;
