@@ -14,16 +14,11 @@
 #include "apa102.h"
 #include "utils.h"
 #include "ledSegment.h"
-#include "mpu6050.h"
 #include "extFetCtrl.h"
 #include "onboardLedCtrl.h"
 
 bool poorMansOS();
 void poorMansOSRunAll();
-
-#define LED_BOARD_SET()		GPIOC->BRR = GPIO_Pin_13
-#define LED_BOARD_CLEAR()	GPIOC->BSRR = GPIO_Pin_13
-#define LED_BOARD_TOGGLE()	GPIOC->ODR ^= GPIO_Pin_13
 
 // Sample pragmas to cope with warnings. Please note the related line at
 // the end of this function, used to pop the compiler diagnostics status.
@@ -170,27 +165,26 @@ uint8_t segmentArmRight=0;
 uint8_t segmentHead=0;
 uint8_t segmentTail=0;
 
-static volatile IMUVals_t imuVals;
-
 int main(int argc, char* argv[])
 {
 	SystemCoreClockUpdate();
 	timeInit();
 	swInit();
-	//extFetInit();
-	//onboardLedCtrlInit();
-	apa102Init(1,5);
+	extFetInit();
+	onboardLedCtrlInit();
+	apa102Init(1,500);
+	apa102Init(2,500);
 	apa102SetDefaultGlobal(GLOBAL_SETTING);
 	apa102UpdateStrip(APA_ALL_STRIPS);
 	ledSegmentPulseSetting_t pulse2;
 	loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse2);
 	pulse2.cycles =0;
-	pulse2.ledsFadeAfter = 1;
-	pulse2.ledsFadeBefore = 1;
-	pulse2.ledsMaxPower = 2;
+	pulse2.ledsFadeAfter = 10;
+	pulse2.ledsFadeBefore = 10;
+	pulse2.ledsMaxPower = 20;
 	pulse2.mode = LEDSEG_MODE_LOOP_END;
-	pulse2.pixelTime = 10;
-	pulse2.pixelsPerIteration = 1;
+	pulse2.pixelTime = 1;
+	pulse2.pixelsPerIteration = 3;
 	pulse2.startDir =1;
 	pulse2.startLed = 1;
 	ledSegmentFadeSetting_t fade2;
@@ -198,9 +192,9 @@ int main(int argc, char* argv[])
 	fade2.cycles =0;
 	fade2.mode = LEDSEG_MODE_BOUNCE;
 	fade2.startDir = -1;
-	fade2.fadeTime = 700;
-	segmentTail=ledSegInitSegment(1,1,5,&pulse2,&fade2);
-	//mpu6050Init();
+	fade2.fadeTime = 500;
+	segmentArmLeft=ledSegInitSegment(1,1,500,&pulse2,&fade2);
+	segmentTail=ledSegInitSegment(2,1,500,&pulse2,&fade2);
 
 	static uint32_t nextCall=0;
 
@@ -210,7 +204,6 @@ int main(int argc, char* argv[])
 		if(systemTime>nextCall)
 		{
 			nextCall=systemTime+300;
-			//mpu6050GetAllValuesStruct(&imuVals,false);
 		}
 	}
 
@@ -401,64 +394,21 @@ int main(int argc, char* argv[])
 }	//End of main()
 
 
-#define LED_DUMMY_NOF_STATES	4
 /*
  * Dummy task to blink LEDs
  */
 static void dummyLedTask()
 {
 	static uint32_t nextCallTime=0;
-	static uint8_t state=0;
-	//This is a debug thingy, to test the LED
-	volatile S_RGB_LED led;
-	led.red=500;
-	led.green=0;
-	led.blue=0;
 	if(systemTime>nextCallTime)
 	{
 		nextCallTime=systemTime+250;
-		switch(state)
-		{
-			case 0:
-			{
-				led.red=0;
-				led.green=0;
-				led.blue=0;
-				break;
-			}
-			case 1:
-			{
-				led.red=500;
-				led.green=0;
-				led.blue=0;
-				break;
-			}
-			case 2:
-			{
-				led.red=0;
-				led.green=500;
-				led.blue=0;
-				break;
-			}
-			case 3:
-			{
-				led.red=0;
-				led.green=0;
-				led.blue=500;
-				break;
-			}
-		}
-		onboardLedCtrlWriteColours(led);
-		state++;
-		if(state>=LED_DUMMY_NOF_STATES)
-		{
-			state=0;
-		}
+		LED_BOARD_TOGGLE();
 	}
 }
 
 #define MAX_DIVISOR	4
-#define MIN_MAX_DIVISOR	3
+#define MIN_MAX_DIVISOR	4
 
 /*
  * Load new colours for a given ledFadeSegment
@@ -747,7 +697,7 @@ void loadMode(prog_mode_t mode)
 }
 
 static volatile bool mutex=false;
-#define OS_NOF_TASKS 4
+#define OS_NOF_TASKS 3
 /*
  * Semi-OS, used for tasks that are not extremely time critical and might take a while to perform
  */
@@ -770,8 +720,7 @@ bool poorMansOS()
 		case 2:
 			dummyLedTask();
 		break;
-		case 3:
-			mpu6050Process();
+		default:
 		break;
 	}
 	task++;

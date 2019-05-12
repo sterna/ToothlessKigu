@@ -11,13 +11,13 @@
 #include <stdbool.h>
 #include "stm32f10x.h"
 
-#define FET_LP_MAX_PWM	1000
-#define FET_HP_MAX_PWM	1000
+#define FET_MAX_PWM	1000
 
 enum
 {
-	FET_LP_NUM=1,
-	FET_HP_NUM=2,
+	FET1_NUM=1,
+	FET2_NUM=2,
+	FET3_NUM=3,
 	FET_ALL=255
 };
 

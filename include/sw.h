@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-//Used for swithc on discovery board. Not used here
+//Used for switch on discovery board. Not used here
 #define SW (GPIOA->IDR & (1<<0))
 
 #define SW1_4_PORT			GPIOB

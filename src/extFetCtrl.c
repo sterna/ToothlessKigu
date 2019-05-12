@@ -18,26 +18,23 @@
 *********************************************************************************
 */
 
-#define RED_LOW_BYTE 		0
-#define RED_HIGH_BYTE 		1
-#define GREEN_LOW_BYTE 		2
-#define GREEN_HIGH_BYTE 	3
-#define BLUE_LOW_BYTE 		4
-#define BLUE_HIGH_BYTE 		5
+#define FET1_PIN_NUM	7
+#define FET1_PIN		utilGetGPIOPin(FET1_PIN_NUM)
+#define FET1_PORT		GPIOA	//This only works if all are on the same port, which they most likely are
+#define FET1_TIMER		TIM3
+#define FET1_CHAN		2
 
-#define PAYLOAD_SIZE		6
+#define FET2_PIN_NUM	0
+#define FET2_PIN		utilGetGPIOPin(FET2_PIN_NUM)
+#define FET2_PORT		GPIOB	//This only works if all are on the same port, which they most likely are
+#define FET2_TIMER		TIM3
+#define FET2_CHAN		3
 
-#define FET_LP_PIN_NUM	0
-#define FET_LP_PIN		utilGetGPIOPin(FET_LP_PIN_NUM)
-#define FET_LP_PORT		GPIOA	//This only works if all are on the same port, which they most likely are
-#define FET_LP_TIMER	TIM2
-#define FET_LP_CHAN		1
-
-#define FET_HP_PIN_NUM	11
-#define FET_HP_PIN		utilGetGPIOPin(FET_HP_PIN_NUM)
-#define FET_HP_PORT		GPIOA	//This only works if all are on the same port, which they most likely are
-#define FET_HP_TIMER	TIM1
-#define FET_HP_CHAN		4
+#define FET3_PIN_NUM	1
+#define FET3_PIN		utilGetGPIOPin(FET3_PIN_NUM)
+#define FET3_PORT		GPIOB	//This only works if all are on the same port, which they most likely are
+#define FET3_TIMER		TIM3
+#define FET3_CHAN		4
 
 /*
 *********************************************************************************
@@ -78,29 +75,35 @@ void extFetInit(void)
 	PrescalerValue = (uint16_t) (SystemCoreClock / 1000000) - 1; // Timer base frequency is 1MHz
 	//Enable all clocks used
 	utilSetClockAFIO(ENABLE);
-	utilSetClockGPIO(FET_LP_PORT,ENABLE);
-	utilSetClockGPIO(FET_HP_PORT,ENABLE);
-	utilSetClockTIM(FET_LP_TIMER,ENABLE);
-	utilSetClockTIM(FET_HP_TIMER,ENABLE);
+	utilSetClockGPIO(FET1_PORT,ENABLE);
+	utilSetClockGPIO(FET2_PORT,ENABLE);
+	utilSetClockGPIO(FET3_PORT,ENABLE);
+	utilSetClockTIM(FET1_TIMER,ENABLE);
+	utilSetClockTIM(FET2_TIMER,ENABLE);
+	utilSetClockTIM(FET3_TIMER,ENABLE);
 
 	//Setup GPIO
 	GPIO_InitStruct.GPIO_Mode	= GPIO_Mode_AF_PP;
 	GPIO_InitStruct.GPIO_Speed	= GPIO_Speed_10MHz;
-	GPIO_InitStruct.GPIO_Pin 	= FET_LP_PIN;
-	GPIO_Init(FET_LP_PORT,&GPIO_InitStruct);
-
-	GPIO_InitStruct.GPIO_Pin 	= FET_HP_PIN;
-	GPIO_Init(FET_HP_PORT,&GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin 	= FET1_PIN;
+	GPIO_Init(FET1_PORT,&GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin 	= FET2_PIN;
+	GPIO_Init(FET2_PORT,&GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin 	= FET3_PIN;
+	GPIO_Init(FET3_PORT,&GPIO_InitStruct);
 
 	// Setup timer to 1Khz Prescaler/period (1.000.000 / 1000)
-	TIMBaseInitStruct.TIM_Period 		= FET_LP_MAX_PWM;
+	TIMBaseInitStruct.TIM_Period 		= FET_MAX_PWM;
 	TIMBaseInitStruct.TIM_Prescaler 	= PrescalerValue;
 	TIMBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIMBaseInitStruct.TIM_CounterMode 	= TIM_CounterMode_Up;
-	TIM_TimeBaseInit(FET_LP_TIMER,&TIMBaseInitStruct);
+	TIM_TimeBaseInit(FET1_TIMER,&TIMBaseInitStruct);
 
-	TIMBaseInitStruct.TIM_Period 		= FET_HP_MAX_PWM;
-	TIM_TimeBaseInit(FET_HP_TIMER,&TIMBaseInitStruct);
+	TIMBaseInitStruct.TIM_Period 		= FET_MAX_PWM;
+	TIM_TimeBaseInit(FET2_TIMER,&TIMBaseInitStruct);
+
+	TIMBaseInitStruct.TIM_Period 		= FET_MAX_PWM;
+	TIM_TimeBaseInit(FET3_TIMER,&TIMBaseInitStruct);
 
 	// Same setting for all timer channels
 	TIM_OCStructInit(&TIMOCInitStruct);
@@ -110,20 +113,28 @@ void extFetInit(void)
 	TIMOCInitStruct.TIM_Pulse 		= 0;
 
 	//Inits the timer PWMs (all channels have the same setting)
-	utilTIMOCInit(FET_LP_TIMER,FET_LP_CHAN,&TIMOCInitStruct);
-	utilTIMOCInit(FET_HP_TIMER,FET_HP_CHAN,&TIMOCInitStruct);
+	utilTIMOCInit(FET1_TIMER,FET1_CHAN,&TIMOCInitStruct);
+	utilTIMOCInit(FET2_TIMER,FET2_CHAN,&TIMOCInitStruct);
+	utilTIMOCInit(FET3_TIMER,FET3_CHAN,&TIMOCInitStruct);
 
-	if(FET_LP_TIMER == TIM1 || FET_LP_TIMER==TIM8)
+
+	if(FET1_TIMER == TIM1 || FET1_TIMER==TIM8)
 	{
-		TIM_CtrlPWMOutputs(FET_LP_TIMER,ENABLE);
+		TIM_CtrlPWMOutputs(FET1_TIMER,ENABLE);
 	}
-	if(FET_HP_TIMER == TIM1 || FET_HP_TIMER==TIM8)
+	if(FET2_TIMER == TIM1 || FET2_TIMER==TIM8)
 	{
-		TIM_CtrlPWMOutputs(FET_HP_TIMER,ENABLE);
+		TIM_CtrlPWMOutputs(FET2_TIMER,ENABLE);
+	}
+	if(FET3_TIMER == TIM1 || FET3_TIMER==TIM8)
+	{
+		TIM_CtrlPWMOutputs(FET3_TIMER,ENABLE);
 	}
 
-	TIM_Cmd(FET_LP_TIMER,ENABLE);
-	TIM_Cmd(FET_HP_TIMER,ENABLE);
+	TIM_Cmd(FET1_TIMER,ENABLE);
+	TIM_Cmd(FET2_TIMER,ENABLE);
+	TIM_Cmd(FET3_TIMER,ENABLE);
+
 }
 
 /*
@@ -133,26 +144,28 @@ void extFetSetDuty(uint8_t fetNum, uint16_t duty)
 {
 	TIM_TypeDef* tmpTim=0;
 	uint8_t tmpChan=0;
+	if(duty>FET_MAX_PWM)
+	{
+		duty=FET_MAX_PWM;
+	}
 	switch(fetNum)
 	{
-		case FET_LP_NUM:
+		case FET1_NUM:
 		{
-			if(duty>FET_LP_MAX_PWM)
-			{
-				duty=FET_LP_MAX_PWM;
-			}
-			tmpTim=FET_LP_TIMER;
-			tmpChan=FET_LP_CHAN;
+			tmpTim=FET1_TIMER;
+			tmpChan=FET1_CHAN;
 			break;
 		}
-		case FET_HP_NUM:
+		case FET2_NUM:
 		{
-			if(duty>FET_HP_MAX_PWM)
-			{
-				duty=FET_HP_MAX_PWM;
-			}
-			tmpTim=FET_HP_TIMER;
-			tmpChan=FET_HP_CHAN;
+			tmpTim=FET2_TIMER;
+			tmpChan=FET2_CHAN;
+			break;
+		}
+		case FET3_NUM:
+		{
+			tmpTim=FET3_TIMER;
+			tmpChan=FET3_CHAN;
 			break;
 		}
 		default:
@@ -169,12 +182,15 @@ void extFetSetState(uint8_t fetNum, FunctionalState st)
 	TIM_TypeDef* tmpTim=0;
 	switch(fetNum)
 	{
-		case FET_LP_NUM:
-			tmpTim=FET_LP_TIMER;
+		case FET1_NUM:
+			tmpTim=FET1_TIMER;
 		break;
-		case FET_HP_NUM:
-			tmpTim=FET_HP_TIMER;
+		case FET2_NUM:
+			tmpTim=FET2_TIMER;
 		break;
+		case FET3_NUM:
+			tmpTim=FET3_TIMER;
+			break;
 		default:
 			return;
 	}

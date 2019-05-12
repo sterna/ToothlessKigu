@@ -37,12 +37,6 @@
 *	Type definitions & enums
 *********************************************************************************
 */
-typedef struct _S_RGB_LED
-{
-	uint16_t red;
-	uint16_t green;
-	uint16_t blue;
-}S_RGB_LED;
 
 /*
 *********************************************************************************
@@ -58,7 +52,9 @@ typedef struct _S_RGB_LED
 
 
 void onboardLedCtrlInit(void);
-void onboardLedCtrlUpdateColors(uint8_t colors[]);
-void onboardLedCtrlWriteColours(S_RGB_LED led);
+
+#define LED_BOARD_SET()		GPIOC->BRR = GPIO_Pin_13
+#define LED_BOARD_CLEAR()	GPIOC->BSRR = GPIO_Pin_13
+#define LED_BOARD_TOGGLE()	GPIOC->ODR ^= GPIO_Pin_13
 
 #endif /* ONBOARD_LED_CTRL_H_ */
