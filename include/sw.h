@@ -17,10 +17,13 @@
 #define SW1_4_PORT			GPIOB
 #define SW1_4_PORT_REG 		SW1_4_PORT->IDR
 
-#define SW1_PIN	6
-#define SW2_PIN	7
-#define SW3_PIN	8
-#define SW4_PIN	9
+
+//TODO: THIS IS INCORRECT AND SHOULD BE CHANGED
+
+#define SW1_PIN	9
+#define SW2_PIN	8
+#define SW3_PIN	7
+#define SW4_PIN	6
 
 #define SW5_7_PORT			GPIOC
 #define SW5_7_PORT_REG 		SW5_7_PORT->IDR

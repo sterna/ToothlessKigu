@@ -172,11 +172,13 @@ int main(int argc, char* argv[])
 	swInit();
 	extFetInit();
 	onboardLedCtrlInit();
+	apa102SetDefaultGlobal(GLOBAL_SETTING);
 	apa102Init(1,500);
 	apa102Init(2,500);
-	apa102SetDefaultGlobal(GLOBAL_SETTING);
 	apa102UpdateStrip(APA_ALL_STRIPS);
-	ledSegmentPulseSetting_t pulse2;
+
+
+	/*ledSegmentPulseSetting_t pulse2;
 	loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse2);
 	pulse2.cycles =0;
 	pulse2.ledsFadeAfter = 10;
@@ -193,10 +195,10 @@ int main(int argc, char* argv[])
 	fade2.mode = LEDSEG_MODE_BOUNCE;
 	fade2.startDir = -1;
 	fade2.fadeTime = 500;
-	segmentArmLeft=ledSegInitSegment(1,1,500,&pulse2,&fade2);
-	segmentTail=ledSegInitSegment(2,1,500,&pulse2,&fade2);
+	segmentArmLeft=ledSegInitSegment(1,1,200,&pulse2,&fade2);
+	segmentTail=ledSegInitSegment(2,1,200,&pulse2,&fade2);*/
 
-	static uint32_t nextCall=0;
+	/*static uint32_t nextCall=0;
 
 	while(1)
 	{
@@ -205,7 +207,7 @@ int main(int argc, char* argv[])
 		{
 			nextCall=systemTime+300;
 		}
-	}
+	}*/
 
 
 
@@ -233,7 +235,9 @@ int main(int argc, char* argv[])
 	fade.mode = LEDSEG_MODE_BOUNCE;
 	fade.startDir = -1;
 	fade.fadeTime = 700;
+
 	segmentTail=ledSegInitSegment(1,1,170,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
+	segmentArmLeft=ledSegInitSegment(2,1,170,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 
 	//This is a loop for a simple user interface, with not as much control
 	simpleModes_t smode=SMODE_BLUE_FADE_YLW_PULSE;
@@ -332,6 +336,9 @@ int main(int argc, char* argv[])
 			ledSegSetFade(segmentTail,&fade);
 			ledSegSetPulse(segmentTail,&pulse);
 			ledSegSetPulseActiveState(segmentTail,pulseIsActive);
+			ledSegSetFade(segmentArmLeft,&fade);
+			ledSegSetPulse(segmentArmLeft,&pulse);
+			ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
 		}	//End of change mode clause
 
 		//Generate a pulse (and switch modes for the staff)
@@ -339,6 +346,9 @@ int main(int argc, char* argv[])
 		{
 			apa102SetDefaultGlobal(APA_MAX_GLOBAL_SETTING);
 			ledSegRestart(segmentTail,true,true);
+			ledSegRestart(segmentArmLeft,true,true);
+			//Force update on all strips
+			apa102UpdateStrip(APA_ALL_STRIPS);
 			uglyModeChangeActivateTime=systemTime+UGLY_MODE_CHANGE_TIME;
 		}
 		if(swGetFallingEdge(2))
@@ -359,12 +369,16 @@ int main(int argc, char* argv[])
 			{
 				ledSegClearFade(segmentTail);
 				ledSegClearPulse(segmentTail);
+				ledSegClearFade(segmentArmLeft);
+				ledSegClearPulse(segmentArmLeft);
 				isActive=false;
 			}
 			else
 			{
 				ledSegSetFade(segmentTail,&fade);
 				ledSegSetPulse(segmentTail,&pulse);
+				ledSegSetFade(segmentArmLeft,&fade);
+				ledSegSetPulse(segmentArmLeft,&pulse);
 				isActive=true;
 			}
 		}
@@ -381,6 +395,9 @@ int main(int argc, char* argv[])
 					ledSegSetFade(segmentTail,&fade);
 					ledSegSetPulse(segmentTail,&pulse);
 					ledSegSetPulseActiveState(segmentTail,pulseIsActive);
+					ledSegSetFade(segmentArmLeft,&fade);
+					ledSegSetPulse(segmentArmLeft,&pulse);
+					ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
 				}
 				break;
 			}
