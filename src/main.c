@@ -229,12 +229,14 @@ int main(int argc, char* argv[])
 	pulse.pixelsPerIteration = 5;
 	pulse.startDir =1;
 	pulse.startLed = 1;
+	pulse.globalSetting=0;
 	ledSegmentFadeSetting_t fade;
 	loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
 	fade.cycles =0;
 	fade.mode = LEDSEG_MODE_BOUNCE;
 	fade.startDir = -1;
 	fade.fadeTime = 700;
+	fade.globalSetting=0;
 
 	segmentTail=ledSegInitSegment(1,1,170,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 	segmentArmLeft=ledSegInitSegment(2,1,170,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
