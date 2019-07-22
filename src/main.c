@@ -16,6 +16,7 @@
 #include "ledSegment.h"
 #include "extFetCtrl.h"
 #include "onboardLedCtrl.h"
+#include "adc.h"
 
 bool poorMansOS();
 void poorMansOSRunAll();
@@ -140,6 +141,7 @@ typedef enum
 	SMODE_RED_FADE_NO_PULSE,
 	SMODE_RANDOM,
 	SMODE_DISCO,
+	SMODE_BATTERY_DISP,
 	SMODE_OFF,
 	SMODE_NOF_MODES
 }simpleModes_t;
@@ -149,6 +151,8 @@ void loadMode(prog_mode_t mode);
 void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st);
 void loadLedSegPulseColour(discoCols_t col,ledSegmentPulseSetting_t* st);
 static void dummyLedTask();
+void displayBattery(uint8_t channel, uint8_t segment, uint16_t startLED);
+uint8_t getBatteryLevel(uint8_t channel);
 
 //Sets if the program goes into the staff
 #define STAFF	1
@@ -164,6 +168,8 @@ uint8_t segmentArmLeft=0;
 uint8_t segmentArmRight=0;
 uint8_t segmentHead=0;
 uint8_t segmentTail=0;
+uint8_t segmentBatteryIndicator=0;
+volatile uint16_t batteryIndicatorStartLed=151;	//There are 156 and 157 LEDs on each side
 
 int main(int argc, char* argv[])
 {
@@ -172,6 +178,7 @@ int main(int argc, char* argv[])
 	swInit();
 	extFetInit();
 	onboardLedCtrlInit();
+	adcInit();
 	apa102SetDefaultGlobal(GLOBAL_SETTING);
 	apa102Init(1,500);
 	apa102Init(2,500);
@@ -237,12 +244,12 @@ int main(int argc, char* argv[])
 	fade.startDir = -1;
 	fade.fadeTime = 700;
 	fade.globalSetting=0;
-
-	segmentTail=ledSegInitSegment(1,1,170,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
-	segmentArmLeft=ledSegInitSegment(2,1,170,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
+	segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
+	segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
+	segmentBatteryIndicator=ledSegInitSegment(1,1,5,0,0);
 
 	//This is a loop for a simple user interface, with not as much control
-	simpleModes_t smode=SMODE_BLUE_FADE_YLW_PULSE;
+	simpleModes_t smode=SMODE_RANDOM;
 	bool isActive=true;
 	bool pulseIsActive=true;
 	bool uglyModeChange=false;
@@ -316,6 +323,11 @@ int main(int argc, char* argv[])
 					loadLedSegFadeColour(DISCO_COL_RANDOM,&fade);
 					loadLedSegPulseColour(DISCO_COL_RANDOM,&pulse);
 					break;
+				case SMODE_BATTERY_DISP:
+				{
+					//Do nothing here
+					break;
+				}
 				case SMODE_OFF:	//turn LEDs off
 				{
 					fade.r_min=0;
@@ -341,6 +353,16 @@ int main(int argc, char* argv[])
 			ledSegSetFade(segmentArmLeft,&fade);
 			ledSegSetPulse(segmentArmLeft,&pulse);
 			ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
+
+			if(smode == SMODE_BATTERY_DISP)
+			{
+				//Pause The other segment (possible arm)
+				//Set LEDs in the correct place to the right colours, corresponding to battery level
+				ledSegSetPulseActiveState(segmentArmLeft,false);
+				ledSegSetFadeActiveState(segmentArmLeft,false);
+				displayBattery(1,segmentArmLeft,batteryIndicatorStartLed);
+			}
+
 		}	//End of change mode clause
 
 		//Generate a pulse (and switch modes for the staff)
@@ -412,6 +434,46 @@ int main(int argc, char* argv[])
 	}	//End of simple main loop mode handling
 }	//End of main()
 
+//The different battery levels in mV
+//The first is the lowest battery level
+#define NOF_BATTERY_LEVELS	5
+const uint16_t batteryLevels[NOF_BATTERY_LEVELS] ={3300,3500,3700,3900,4100};
+
+/*
+ * Displays the battery state on a given segment with a given start LED (takes a total of 5 LEDs)
+ */
+void displayBattery(uint8_t channel, uint8_t segment, uint16_t startLED)
+{
+	volatile uint16_t voltage=0;
+	voltage=adcGetBatVolt(channel);
+	for(uint8_t i=0;i<NOF_BATTERY_LEVELS;i++)
+	{
+		if(voltage>batteryLevels[i])
+		{
+			ledSegSetLed(segment,startLED+i,0,200,0);
+		}
+		else
+		{
+			ledSegSetLed(segment,startLED+i,200,0,0);
+		}
+	}
+}
+
+/*
+ * Returns the current battery level
+ */
+uint8_t getBatteryLevel(uint8_t channel)
+{
+	volatile uint16_t voltage=0;
+	voltage=adcGetBatVolt(channel);
+	for(uint8_t i=0;i<NOF_BATTERY_LEVELS;i++)
+	{
+		if(voltage<batteryLevels[i])
+		{
+			return i;
+		}
+	}
+}
 
 /*
  * Dummy task to blink LEDs
