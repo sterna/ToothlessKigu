@@ -139,6 +139,9 @@ typedef enum
 	SMODE_CYAN_FADE_NO_PULSE,
 	SMODE_YLW_FADE_NO_PULSE,
 	SMODE_RED_FADE_NO_PULSE,
+	SMODE_BLUE_TO_RED_NO_PULSE,
+	SMODE_BLUE_TO_RED_GREEN_PULSE,
+	SMODE_GREEN_TO_RED_NO_PULSE,
 	SMODE_RANDOM,
 	SMODE_DISCO,
 	SMODE_BATTERY_DISP,
@@ -149,6 +152,7 @@ typedef enum
 void generateColor(led_fade_setting_t* s);
 void loadMode(prog_mode_t mode);
 void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st);
+void loadLedSegFadeBetweenColours(discoCols_t colFrom, discoCols_t colTo, ledSegmentFadeSetting_t* st);
 void loadLedSegPulseColour(discoCols_t col,ledSegmentPulseSetting_t* st);
 static void dummyLedTask();
 void displayBattery(uint8_t channel, uint8_t segment, uint16_t startLED);
@@ -156,7 +160,7 @@ uint8_t getBatteryLevel(uint8_t channel);
 
 //Sets if the program goes into the staff
 #define STAFF	1
-#define GLOBAL_SETTING	6
+#define GLOBAL_SETTING	8	//6 Todo: Pimped slightly for EF. My big battery should be fine
 #define UGLY_MODE_CHANGE_TIME	10000
 
 #define PULSE_FAST_PIXEL_TIME	1
@@ -249,7 +253,7 @@ int main(int argc, char* argv[])
 	segmentBatteryIndicator=ledSegInitSegment(1,1,5,0,0);
 
 	//This is a loop for a simple user interface, with not as much control
-	simpleModes_t smode=SMODE_RANDOM;
+	simpleModes_t smode=SMODE_RED_FADE_NO_PULSE;
 	bool isActive=true;
 	bool pulseIsActive=true;
 	bool uglyModeChange=false;
@@ -314,6 +318,22 @@ int main(int argc, char* argv[])
 					break;
 				case SMODE_RED_FADE_NO_PULSE:
 					loadLedSegFadeColour(DISCO_COL_RED,&fade);
+					pulseIsActive=false;
+					break;
+				case SMODE_BLUE_TO_RED_NO_PULSE:
+					loadLedSegFadeBetweenColours(DISCO_COL_YELLOW,DISCO_COL_GREEN,&fade);
+					fade.fadeTime=2*FADE_NORMAL_TIME;
+					//loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
+					pulseIsActive=false;
+					break;
+				case SMODE_BLUE_TO_RED_GREEN_PULSE:
+					loadLedSegFadeBetweenColours(DISCO_COL_CYAN,DISCO_COL_PURPLE,&fade);
+					pulseIsActive=false;
+					//loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
+					break;
+				case SMODE_GREEN_TO_RED_NO_PULSE:
+					loadLedSegFadeBetweenColours(DISCO_COL_CYAN,DISCO_COL_RED,&fade);
+					fade.fadeTime=2*FADE_NORMAL_TIME;
 					pulseIsActive=false;
 					break;
 				case SMODE_DISCO:
@@ -521,10 +541,30 @@ void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st)
 	st->g_min = st->g_max/MIN_MAX_DIVISOR;
 	st->b_max = tmpSet.b_max/MAX_DIVISOR;
 	st->b_min = st->b_max/MIN_MAX_DIVISOR;
+	st->colFromTo = false;
 }
 
 /*
- * Load new colours for a given ledFadeSegment
+ * Sets up a fade from one colour to another one
+ */
+void loadLedSegFadeBetweenColours(discoCols_t colFrom, discoCols_t colTo, ledSegmentFadeSetting_t* st)
+{
+	ledSegmentFadeSetting_t settingFrom;
+	ledSegmentFadeSetting_t settingTo;
+	//Fetch colours into two settings (it's probably easier to do it like this)
+	loadLedSegFadeColour(colFrom,&settingFrom);
+	loadLedSegFadeColour(colTo,&settingTo);
+	st->r_min = settingFrom.r_max;
+	st->r_max = settingTo.r_max;
+	st->g_min = settingFrom.g_max;
+	st->g_max = settingTo.g_max;
+	st->b_min = settingFrom.b_max;
+	st->b_max = settingTo.b_max;
+	st->colFromTo = true;
+}
+
+/*
+ * Load new colours for a given ledPulseSegment
  */
 void loadLedSegPulseColour(discoCols_t col,ledSegmentPulseSetting_t* st)
 {
