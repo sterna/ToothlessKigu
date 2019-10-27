@@ -160,7 +160,7 @@ uint8_t getBatteryLevel(uint8_t channel);
 
 //Sets if the program goes into the staff
 #define STAFF	1
-#define GLOBAL_SETTING	8	//6 Todo: Pimped slightly for EF. My big battery should be fine
+#define GLOBAL_SETTING	3	//6 Todo: Pimped slightly for EF. My big battery should be fine
 #define UGLY_MODE_CHANGE_TIME	10000
 
 #define PULSE_FAST_PIXEL_TIME	1
@@ -243,8 +243,8 @@ int main(int argc, char* argv[])
 	pulse.globalSetting=0;
 	ledSegmentFadeSetting_t fade;
 	loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
-	fade.cycles =0;
-	fade.mode = LEDSEG_MODE_BOUNCE;
+	fade.cycles =5;
+	fade.mode = LEDSEG_MODE_LOOP;
 	fade.startDir = -1;
 	fade.fadeTime = 700;
 	fade.globalSetting=0;
@@ -541,7 +541,6 @@ void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st)
 	st->g_min = st->g_max/MIN_MAX_DIVISOR;
 	st->b_max = tmpSet.b_max/MAX_DIVISOR;
 	st->b_min = st->b_max/MIN_MAX_DIVISOR;
-	st->colFromTo = false;
 }
 
 /*
@@ -560,7 +559,6 @@ void loadLedSegFadeBetweenColours(discoCols_t colFrom, discoCols_t colTo, ledSeg
 	st->g_max = settingTo.g_max;
 	st->b_min = settingFrom.b_max;
 	st->b_max = settingTo.b_max;
-	st->colFromTo = true;
 }
 
 /*
