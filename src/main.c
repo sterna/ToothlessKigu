@@ -153,6 +153,7 @@ void generateColor(led_fade_setting_t* s);
 void loadMode(prog_mode_t mode);
 void loadLedSegFadeColour(discoCols_t col,ledSegmentFadeSetting_t* st);
 void loadLedSegFadeBetweenColours(discoCols_t colFrom, discoCols_t colTo, ledSegmentFadeSetting_t* st);
+void loadModeChange(discoCols_t col, ledSegmentFadeSetting_t* st, uint8_t segment);
 void loadLedSegPulseColour(discoCols_t col,ledSegmentPulseSetting_t* st);
 static void dummyLedTask();
 void displayBattery(uint8_t channel, uint8_t segment, uint16_t startLED);
@@ -160,7 +161,7 @@ uint8_t getBatteryLevel(uint8_t channel);
 
 //Sets if the program goes into the staff
 #define STAFF	1
-#define GLOBAL_SETTING	3	//6 Todo: Pimped slightly for EF. My big battery should be fine
+#define GLOBAL_SETTING	2	//6 Todo: Pimped slightly for EF. My big battery should be fine
 #define UGLY_MODE_CHANGE_TIME	10000
 
 #define PULSE_FAST_PIXEL_TIME	1
@@ -243,8 +244,8 @@ int main(int argc, char* argv[])
 	pulse.globalSetting=0;
 	ledSegmentFadeSetting_t fade;
 	loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
-	fade.cycles =5;
-	fade.mode = LEDSEG_MODE_LOOP;
+	fade.cycles =0;
+	fade.mode = LEDSEG_MODE_BOUNCE;
 	fade.startDir = -1;
 	fade.fadeTime = 700;
 	fade.globalSetting=0;
@@ -253,17 +254,18 @@ int main(int argc, char* argv[])
 	segmentBatteryIndicator=ledSegInitSegment(1,1,5,0,0);
 
 	//This is a loop for a simple user interface, with not as much control
-	simpleModes_t smode=SMODE_RED_FADE_NO_PULSE;
+	simpleModes_t smode=SMODE_BLUE_FADE_YLW_PULSE;
 	bool isActive=true;
 	bool pulseIsActive=true;
 	bool uglyModeChange=false;
 	uint32_t uglyModeChangeActivateTime=0;
 	uint32_t nextDiscoUpdate=0;
+	uint8_t modeChangeStage=0;
 	while(1)
 	{
 		poorMansOS();
 		//Change mode
-		if(swGetFallingEdge(1) || uglyModeChange)
+		if(swGetFallingEdge(1) || uglyModeChange || modeChangeStage)
 		{
 			pulseIsActive=true;
 			uglyModeChange=false;
@@ -281,10 +283,13 @@ int main(int argc, char* argv[])
 					//Do nothing for default
 				}
 			}
-			smode++;
-			if(smode>=SMODE_NOF_MODES)
+			if(!modeChangeStage)
 			{
-				smode=0;
+				smode++;
+				if(smode>=SMODE_NOF_MODES)
+				{
+					smode=0;
+				}
 			}
 			switch(smode)
 			{
@@ -293,20 +298,53 @@ int main(int argc, char* argv[])
 					loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
 				break;
 				case SMODE_CYAN_FADE_YLW_PULSE:
-					loadLedSegFadeColour(DISCO_COL_CYAN,&fade);
-					loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_CYAN,&fade,segmentTail);
+						modeChangeStage=1;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=-1;
+						loadLedSegFadeColour(DISCO_COL_CYAN,&fade);
+						loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
+					}
 				break;
+				case SMODE_RED_FADE_YLW_PULSE:
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_RED,&fade,segmentTail);
+						modeChangeStage=1;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=-1;
+						loadLedSegFadeColour(DISCO_COL_RED,&fade);
+						loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
+					}
+					break;
+				case SMODE_YLW_FADE_PURPLE_PULSE:
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_YELLOW,&fade,segmentTail);
+						modeChangeStage=1;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=-1;
+						loadLedSegFadeColour(DISCO_COL_YELLOW,&fade);
+						loadLedSegPulseColour(DISCO_COL_PURPLE,&pulse);
+					}
+					break;
 				case SMODE_YLW_FADE_GREEN_PULSE:
 					loadLedSegFadeColour(DISCO_COL_YELLOW,&fade);
 					loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
-					break;
-				case SMODE_RED_FADE_YLW_PULSE:
-					loadLedSegFadeColour(DISCO_COL_RED,&fade);
-					loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
-					break;
-				case SMODE_YLW_FADE_PURPLE_PULSE:
-					loadLedSegFadeColour(DISCO_COL_YELLOW,&fade);
-					loadLedSegPulseColour(DISCO_COL_PURPLE,&pulse);
 					break;
 				case SMODE_CYAN_FADE_NO_PULSE:
 					loadLedSegFadeColour(DISCO_COL_CYAN,&fade);
@@ -367,12 +405,19 @@ int main(int argc, char* argv[])
 					break;
 				}
 			}
-			ledSegSetFade(segmentTail,&fade);
-			ledSegSetPulse(segmentTail,&pulse);
-			ledSegSetPulseActiveState(segmentTail,pulseIsActive);
-			ledSegSetFade(segmentArmLeft,&fade);
-			ledSegSetPulse(segmentArmLeft,&pulse);
-			ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
+			if(modeChangeStage<2)
+			{
+				ledSegSetFade(segmentTail,&fade);
+				ledSegSetPulse(segmentTail,&pulse);
+				ledSegSetPulseActiveState(segmentTail,pulseIsActive);
+				ledSegSetFade(segmentArmLeft,&fade);
+				ledSegSetPulse(segmentArmLeft,&pulse);
+				ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
+				if(modeChangeStage==1)
+				{
+					modeChangeStage=2;
+				}
+			}
 
 			if(smode == SMODE_BATTERY_DISP)
 			{
@@ -426,6 +471,7 @@ int main(int argc, char* argv[])
 				isActive=true;
 			}
 		}
+
 		//Handle special modes
 		switch(smode)
 		{
@@ -510,6 +556,25 @@ static void dummyLedTask()
 
 #define MAX_DIVISOR	4
 #define MIN_MAX_DIVISOR	4
+
+/*
+ * Sets up a mode where you switch from one mode to another (soft fade between the two fade colours)
+ */
+void loadModeChange(discoCols_t col, ledSegmentFadeSetting_t* st, uint8_t segment)
+{
+	//Load the setting as normal (will give us the max setting, as fade by default starts from max)
+	loadLedSegFadeColour(col,st);
+
+	//Get the colour of the current state to know what to move from
+	ledSegment_t currentSeg;
+	ledSegGetState(segment,&currentSeg);
+	st->r_min = currentSeg.state.r;
+	st->g_min = currentSeg.state.g;
+	st->b_min = currentSeg.state.b;
+	st->cycles=1;
+	st->startDir=1;
+}
+
 
 /*
  * Load new colours for a given ledFadeSegment
@@ -640,8 +705,10 @@ void handleModes()
 	//Temp variables used to contain various settings
 	ledSegmentFadeSetting_t* fdSet;
 	ledSegmentPulseSetting_t* puSet;
+	ledSegment_t seg;
+	ledSegGetState(segmentTail,&seg);
 	ledSegmentState_t st;
-	ledSegGetState(segmentTail,&st);
+	st = seg.state;
 	fdSet=&(st.confFade);
 	puSet=&(st.confPulse);
 	//Check if we should change mode
