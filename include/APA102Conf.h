@@ -17,7 +17,7 @@
 //The maximum numbers of LEDs per strip
 #define APA_MAX_NOF_LEDS 500
 //The number of strips (all these are handled in a hardcoded way)
-#define APA_NOF_STRIPS 3
+#define APA_NOF_STRIPS 2
 //Keyword to use when trying to adress all strips (might not work for all functions)
 #define APA_ALL_STRIPS 255
 
