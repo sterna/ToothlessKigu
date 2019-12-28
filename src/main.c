@@ -161,7 +161,7 @@ uint8_t getBatteryLevel(uint8_t channel);
 
 //Sets if the program goes into the staff
 #define STAFF	1
-#define GLOBAL_SETTING	2	//6 Todo: Pimped slightly for EF. My big battery should be fine
+#define GLOBAL_SETTING	1	//6 Todo: Pimped slightly for EF. My big battery should be fine
 #define UGLY_MODE_CHANGE_TIME	10000
 
 #define PULSE_FAST_PIXEL_TIME	1
@@ -231,27 +231,36 @@ int main(int argc, char* argv[])
 	}
 */
 	ledSegmentPulseSetting_t pulse;
-	loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
+	loadLedSegPulseColour(DISCO_COL_WHITE,&pulse);
+
 	pulse.cycles =0;
-	pulse.ledsFadeAfter = 5;
+	pulse.ledsFadeAfter = 0;
 	pulse.ledsFadeBefore = 5;
-	pulse.ledsMaxPower = 25;
-	pulse.mode = LEDSEG_MODE_LOOP_END;
-	pulse.pixelTime = 2;
+	pulse.ledsMaxPower = 1;
+	pulse.mode = LEDSEG_MODE_GLITTER_LOOP_PERSIST;
+	pulse.pixelTime = 75;
 	pulse.pixelsPerIteration = 5;
 	pulse.startDir =1;
 	pulse.startLed = 1;
-	pulse.globalSetting=0;
+	pulse.globalSetting=5;
 	ledSegmentFadeSetting_t fade;
-	loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
+	loadLedSegFadeColour(DISCO_COL_PURPLE,&fade);
 	fade.cycles =0;
 	fade.mode = LEDSEG_MODE_BOUNCE;
 	fade.startDir = -1;
 	fade.fadeTime = 700;
 	fade.globalSetting=0;
-	segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
-	segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
-	segmentBatteryIndicator=ledSegInitSegment(1,1,5,0,0);
+	segmentTail=ledSegInitSegment(1,1,30,&pulse,&fade);
+	loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
+	loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
+	pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
+	pulse.ledsMaxPower = 50;
+	pulse.pixelsPerIteration = 4;
+	pulse.pixelTime = 3000;
+	segmentArmLeft=ledSegInitSegment(1,31,60,&pulse,&fade);
+	//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
+	//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
+	segmentBatteryIndicator=ledSegInitSegment(1,60,280,&pulse,&fade);
 
 	//This is a loop for a simple user interface, with not as much control
 	simpleModes_t smode=SMODE_BLUE_FADE_YLW_PULSE;
