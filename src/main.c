@@ -188,6 +188,7 @@ int main(int argc, char* argv[])
 	apa102Init(1,500);
 	apa102Init(2,500);
 	apa102UpdateStrip(APA_ALL_STRIPS);
+	utilRandSeed(adcGetBatVolt(1));
 
 
 	/*ledSegmentPulseSetting_t pulse2;
@@ -236,10 +237,10 @@ int main(int argc, char* argv[])
 	pulse.cycles =0;
 	pulse.ledsFadeAfter = 0;
 	pulse.ledsFadeBefore = 5;
-	pulse.ledsMaxPower = 1;
-	pulse.mode = LEDSEG_MODE_GLITTER_LOOP_PERSIST;
-	pulse.pixelTime = 75;
-	pulse.pixelsPerIteration = 5;
+	pulse.ledsMaxPower = 5;
+	pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
+	pulse.pixelTime = 100;
+	pulse.pixelsPerIteration = 4;
 	pulse.startDir =1;
 	pulse.startLed = 1;
 	pulse.globalSetting=5;
@@ -256,7 +257,7 @@ int main(int argc, char* argv[])
 	pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
 	pulse.ledsMaxPower = 50;
 	pulse.pixelsPerIteration = 4;
-	pulse.pixelTime = 3000;
+	pulse.pixelTime = 2000;
 	segmentArmLeft=ledSegInitSegment(1,31,60,&pulse,&fade);
 	//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 	//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
