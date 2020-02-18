@@ -61,6 +61,8 @@ typedef enum
 	DISCO_COL_RED,
 	DISCO_COL_GREEN,
 	DISCO_COL_BLUE,
+	DISCO_COL_MAGENTA,
+	DISCO_COL_LIME,
 	DISCO_COL_RANDOM,
 	DISCO_COL_OFF,
 	DISCO_COL_NOF_COLOURS
@@ -89,7 +91,9 @@ led_fade_setting_t setting_disco[DISCO_NOF_COLORS]=
 {0,500,0,500,0,500,1000,0,1},	//White
 {0,500,0,0,0,0,1000,0,1},		//Red
 {0,0,0,500,0,0,1000,0,1},		//Green
-{0,0,0,0,0,500,1000,0,1}		//Blue
+{0,0,0,0,0,500,1000,0,1},		//Blue
+{0,600,0,60,0,200,1000,0,1},	//Magenta
+{0,280,0,500,0,70,1000,0,1}	//Lime
 };
 
 
@@ -136,16 +140,18 @@ typedef enum
 	SMODE_RED_FADE_YLW_PULSE,
 	SMODE_YLW_FADE_PURPLE_PULSE,
 	SMODE_YLW_FADE_GREEN_PULSE,
+	SMODE_GREEN_FADE_PURPLE_PULSE,
 	SMODE_CYAN_FADE_NO_PULSE,
 	SMODE_YLW_FADE_NO_PULSE,
 	SMODE_RED_FADE_NO_PULSE,
 	SMODE_BLUE_TO_RED_NO_PULSE,
 	SMODE_BLUE_TO_RED_GREEN_PULSE,
-	SMODE_GREEN_TO_RED_NO_PULSE,
+	SMODE_CYAN_TO_RED_NO_PULSE,
 	SMODE_RANDOM,
 	SMODE_DISCO,
 	SMODE_BATTERY_DISP,
 	SMODE_OFF,
+	SMODE_STAD_I_LJUS,
 	SMODE_NOF_MODES
 }simpleModes_t;
 
@@ -160,8 +166,10 @@ void displayBattery(uint8_t channel, uint8_t segment, uint16_t startLED);
 uint8_t getBatteryLevel(uint8_t channel);
 
 //Sets if the program goes into the staff
-#define GLOBAL_SETTING	2	//6 Todo: Pimped slightly for EF. My big battery should be fine
-#define UGLY_MODE_CHANGE_TIME	1000
+#define GLOBAL_SETTING	6	//6 Todo: Pimped slightly for EF. My big battery should be fine
+#define UGLY_MODE_CHANGE_TIME			1000
+#define INTENSITY_CHANGE_PERIOD			1000
+#define GLITTER_TO_PULSE_CHANGE_TIME	5000
 
 #define PULSE_FAST_PIXEL_TIME	1
 #define PULSE_NORMAL_PIXEL_TIME	2
@@ -188,19 +196,6 @@ volatile uint16_t batteryIndicatorStartLed=151;	//There are 156 and 157 LEDs on 
  * Leg, right, part2: 75-89	(last in part2 is the same as first in part3. This LED is #89)
  * Leg, right, part3: 89-213 (including sacrificial LED (#213))
  * Leg, left, whole: 214-385 (including last led, which is the same as the first on next segment)
- */
-
-/*
- * New code:
- *  Performance program
- *  	1. Fade from nothing to yellow low power. Fade up and down
- *  	2. White glitter in bottom half, fade to stronger yellow, white.
- *  	2b. White glitter in top half and head, stronger yellow white
- *  	3. Fade back to yellow, low power. Fade up and down.
- *  	4. Increase power slightly
- *  	5. Go to fade white glitter again, stronger yellow (same as 2). Bottom half.
- *  	5b. Same as 2b
- *  	6. Slow fade to final colour during crescendo! Much light during this!
  */
 
 int main(int argc, char* argv[])
@@ -250,7 +245,7 @@ int main(int argc, char* argv[])
 	}*/
 
 	ledSegmentPulseSetting_t pulse;
-	loadLedSegPulseColour(DISCO_COL_PURPLE,&pulse);
+	loadLedSegPulseColour(DISCO_COL_RED,&pulse);
 	pulse.cycles =0;
 	pulse.ledsFadeAfter = 0;
 	pulse.ledsFadeBefore = 5;
@@ -260,10 +255,10 @@ int main(int argc, char* argv[])
 	pulse.pixelsPerIteration = 5;
 	pulse.startDir =1;
 	pulse.startLed = 1;
-	pulse.globalSetting=3;
+	pulse.globalSetting=0;
 
 	ledSegmentFadeSetting_t fade;
-	loadLedSegFadeColour(DISCO_COL_RED,&fade);
+	loadLedSegFadeColour(DISCO_COL_PURPLE,&fade);
 	fade.cycles =0;
 	fade.mode = LEDSEG_MODE_BOUNCE;
 	fade.startDir = -1;
@@ -279,14 +274,16 @@ int main(int argc, char* argv[])
 	//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 
 	//This is a loop for a simple user interface, with not as much control
-	simpleModes_t smode=SMODE_BLUE_FADE_YLW_PULSE;
-	bool isActive=true;
+	simpleModes_t smode=SMODE_RANDOM;
 	bool pulseIsActive=true;
-	bool uglyModeChange=false;
 	bool pause=false;
 	uint32_t lightIntensitySettingTime=0;
 	uint32_t nextDiscoUpdate=0;
 	uint8_t modeChangeStage=0;
+	uint8_t stadILjusState=0;
+	uint32_t stadILjusTime=0;
+	bool stadILjusIsLoaded=false;
+	bool isPulseMode=false;
 	while(1)
 	{
 		poorMansOS();
@@ -320,8 +317,21 @@ int main(int argc, char* argv[])
 			switch(smode)
 			{
 				case SMODE_BLUE_FADE_YLW_PULSE:
-					loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
-					loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_BLUE,&fade,segmentTail);
+						modeChangeStage=1;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=-1;
+						loadLedSegFadeColour(DISCO_COL_BLUE,&fade);
+						loadLedSegPulseColour(DISCO_COL_YELLOW,&pulse);
+					}
+					//loadLedSegFadeColour(DISCO_COL_MAGENTA,&fade);
+					//loadLedSegPulseColour(DISCO_COL_LIME,&pulse);
 				break;
 				case SMODE_CYAN_FADE_YLW_PULSE:
 					if(!modeChangeStage)
@@ -373,11 +383,29 @@ int main(int argc, char* argv[])
 					loadLedSegFadeColour(DISCO_COL_YELLOW,&fade);
 					loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
 					break;
+				case SMODE_GREEN_FADE_PURPLE_PULSE:
+				{
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_GREEN,&fade,segmentTail);
+						modeChangeStage=1;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=-1;
+						loadLedSegFadeColour(DISCO_COL_GREEN,&fade);
+						loadLedSegPulseColour(DISCO_COL_PURPLE,&pulse);
+					}
+					break;
+				}
 				case SMODE_CYAN_FADE_NO_PULSE:
 					if(!modeChangeStage)
 					{
 						loadModeChange(DISCO_COL_CYAN,&fade,segmentTail);
 						modeChangeStage=1;
+						pulseIsActive=false;
 					}
 					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
 					{
@@ -393,6 +421,7 @@ int main(int argc, char* argv[])
 					{
 						loadModeChange(DISCO_COL_YELLOW,&fade,segmentTail);
 						modeChangeStage=1;
+						pulseIsActive=false;
 					}
 					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
 					{
@@ -408,6 +437,7 @@ int main(int argc, char* argv[])
 					{
 						loadModeChange(DISCO_COL_RED,&fade,segmentTail);
 						modeChangeStage=1;
+						pulseIsActive=false;
 					}
 					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
 					{
@@ -419,23 +449,61 @@ int main(int argc, char* argv[])
 					}
 					break;
 				case SMODE_BLUE_TO_RED_NO_PULSE:
-					loadLedSegFadeBetweenColours(DISCO_COL_YELLOW,DISCO_COL_GREEN,&fade);
-					fade.fadeTime=2*FADE_NORMAL_TIME;
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_BLUE,&fade,segmentTail);
+						modeChangeStage=1;
+						pulseIsActive=false;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=1;
+						loadLedSegFadeBetweenColours(DISCO_COL_BLUE,DISCO_COL_RED,&fade);
+						pulseIsActive=false;
+					}
 					//loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
 					pulseIsActive=false;
 					break;
 				case SMODE_BLUE_TO_RED_GREEN_PULSE:
-					loadLedSegFadeBetweenColours(DISCO_COL_CYAN,DISCO_COL_PURPLE,&fade);
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_BLUE,&fade,segmentTail);
+						modeChangeStage=1;
+						pulseIsActive=false;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=1;
+						loadLedSegFadeBetweenColours(DISCO_COL_BLUE,DISCO_COL_GREEN,&fade);
+						pulseIsActive=false;
+					}
 					pulseIsActive=false;
 					//loadLedSegPulseColour(DISCO_COL_GREEN,&pulse);
 					break;
-				case SMODE_GREEN_TO_RED_NO_PULSE:
-					loadLedSegFadeBetweenColours(DISCO_COL_CYAN,DISCO_COL_RED,&fade);
+				case SMODE_CYAN_TO_RED_NO_PULSE:
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_CYAN,&fade,segmentTail);
+						modeChangeStage=1;
+						pulseIsActive=false;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=1;
+						loadLedSegFadeBetweenColours(DISCO_COL_CYAN,DISCO_COL_RED,&fade);
+						pulseIsActive=false;
+					}
 					fade.fadeTime=2*FADE_NORMAL_TIME;
 					pulseIsActive=false;
 					break;
 				case SMODE_DISCO:
-					pulse.pixelTime=PULSE_FAST_PIXEL_TIME;
+					pulse.pixelTime=PULSE_FAST_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
 					fade.fadeTime=FADE_FAST_TIME;	//The break is omitted by design, since SMODE_DISCO does the same thing as SMODE_RANDOM
 				case SMODE_RANDOM:
 					loadLedSegFadeColour(DISCO_COL_RANDOM,&fade);
@@ -457,6 +525,27 @@ int main(int argc, char* argv[])
 					pulse.r_max=0;
 					pulse.g_max=0;
 					pulse.b_max=0;
+					break;
+				}
+				case SMODE_STAD_I_LJUS:
+				{
+					//Special mode for Stad i ljus performance
+					stadILjusState=1;
+					if(!modeChangeStage)
+					{
+						loadModeChange(DISCO_COL_YELLOW,&fade,segmentTail);
+						pulseIsActive=false;
+						modeChangeStage=1;
+					}
+					else if(modeChangeStage==2 && ledSegGetFadeDone(segmentTail))
+					{
+						//Todo: set fade parameters
+						modeChangeStage=0;
+						fade.cycles=0;
+						fade.startDir=-1;
+						loadLedSegFadeColour(DISCO_COL_YELLOW,&fade);
+						pulseIsActive=false;
+					}
 					break;
 				}
 				case SMODE_NOF_MODES:	//Should never happen
@@ -490,20 +579,65 @@ int main(int argc, char* argv[])
 
 		}	//End of change mode clause
 
+		//Switches between pulse mode and glitter mode
+		if(swGetActiveForMoreThan(1,GLITTER_TO_PULSE_CHANGE_TIME))
+		{
+			if(isPulseMode)
+			{
+				//Switch to glitter mode
+				pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
+				pulse.cycles =0;
+				pulse.ledsFadeAfter = 0;
+				pulse.ledsFadeBefore = 5;
+				pulse.ledsMaxPower = 150;
+				pulse.pixelTime = 2000;
+				pulse.pixelsPerIteration = 5;
+				pulse.startDir =1;
+				pulse.startLed = 1;
+				isPulseMode=false;
+			}
+			else
+			{
+				//Switch to pulse mode
+				pulse.mode=LEDSEG_MODE_LOOP_END;
+				pulse.cycles =0;
+				pulse.ledsFadeAfter = 10;
+				pulse.ledsFadeBefore = 10;
+				pulse.ledsMaxPower = 20;
+				pulse.pixelTime = 1;
+				pulse.pixelsPerIteration = 3;
+				pulse.startDir =1;
+				pulse.startLed = 1;
+				isPulseMode=true;
+			}
+			ledSegSetFade(segmentTail,&fade);
+			ledSegSetPulse(segmentTail,&pulse);
+			ledSegSetPulseActiveState(segmentTail,pulseIsActive);
+			ledSegSetFade(segmentArmLeft,&fade);
+			ledSegSetPulse(segmentArmLeft,&pulse);
+			ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
+		}
 		//Generate a pulse
 		if(swGetRisingEdge(2))
 		{
-			apa102SetDefaultGlobal(globalSetting*4);
-			ledSegRestart(segmentTail,true,true);
-			ledSegRestart(segmentArmLeft,true,true);
-			//Force update on all strips
-			apa102UpdateStrip(APA_ALL_STRIPS);
+			if(smode==SMODE_STAD_I_LJUS)
+			{
+				stadILjusState++;
+				stadILjusIsLoaded=false;
+			}
+			else
+			{
+				apa102SetDefaultGlobal(globalSetting*4);
+				ledSegRestart(segmentTail,true,true);
+				ledSegRestart(segmentArmLeft,true,true);
+				//Force update on all strips
+				apa102UpdateStrip(APA_ALL_STRIPS);
+			}
 		}
 		if(swGetFallingEdge(2))
 		{
 			apa102SetDefaultGlobal(globalSetting);
 		}
-
 		//Set lights on/off
 		if(swGetFallingEdge(3))
 		{
@@ -525,13 +659,8 @@ int main(int argc, char* argv[])
 			}
 		}
 		//Change light intensity (global setting)
-		if(swGetRisingEdge(3))
+		if(swGetActiveForMoreThan(3,INTENSITY_CHANGE_PERIOD))
 		{
-			lightIntensitySettingTime=systemTime+UGLY_MODE_CHANGE_TIME;
-		}
-		if(swGetState(3) && systemTime>lightIntensitySettingTime)
-		{
-			lightIntensitySettingTime=systemTime+UGLY_MODE_CHANGE_TIME;
 			globalSetting++;
 			if(globalSetting>APA_MAX_GLOBAL_SETTING/2)
 			{
@@ -556,6 +685,159 @@ int main(int argc, char* argv[])
 					ledSegSetFade(segmentArmLeft,&fade);
 					ledSegSetPulse(segmentArmLeft,&pulse);
 					ledSegSetPulseActiveState(segmentArmLeft,pulseIsActive);
+				}
+				break;
+			}
+			case SMODE_STAD_I_LJUS:
+			{
+
+				const uint32_t stadILjus2To3=3000;
+				const uint32_t stadILjusFinalFade=1000;
+				switch (stadILjusState)
+				{
+					case 1:
+					{
+						//Do nothing, first default state
+						break;
+					}
+					case 2:	//@First Stad I ljus
+					{
+						//White glitter in bottom half, fade to stronger yellow
+						//When done/waited for a bit, update state
+						if(!stadILjusIsLoaded)
+						{
+							stadILjusTime=systemTime+stadILjus2To3;
+							loadLedSegPulseColour(DISCO_COL_WHITE,&pulse);
+							pulse.mode = LEDSEG_MODE_GLITTER_LOOP_PERSIST;
+							pulse.startDir=1;
+							pulse.pixelTime=4000;
+							pulse.ledsMaxPower=200;
+							pulse.pixelsPerIteration=10;
+							//ledSegSetFade(segmentTail,&fade);
+							ledSegSetPulse(segmentTail,&pulse);
+							ledSegSetPulseActiveState(segmentTail,true);
+							stadILjusIsLoaded=true;
+						}
+						if(systemTime>stadILjusTime)
+						{
+							stadILjusState=3;
+							stadILjusIsLoaded=false;
+						}
+						break;
+					}
+					case 3:	//@Automatic from state 2
+					{
+						 //White glitter in top half and head, stronger yellow
+						if(!stadILjusIsLoaded)
+						{
+							stadILjusTime=systemTime+stadILjus2To3;
+							loadLedSegPulseColour(DISCO_COL_WHITE,&pulse);
+							pulse.mode = LEDSEG_MODE_GLITTER_LOOP_PERSIST;
+							pulse.startDir=1;
+							pulse.pixelTime=3000;
+							pulse.ledsMaxPower=200;
+							pulse.pixelsPerIteration=10;
+							//ledSegSetFade(segmentArmLeft,&fade);
+							ledSegSetPulse(segmentArmLeft,&pulse);
+							ledSegSetPulseActiveState(segmentArmLeft,true);
+							stadILjusIsLoaded=true;
+						}
+						break;
+					}
+					case 4:	//@After "Föds på nytt", during trumpet solo
+					{
+						//Fade back to yellow, low power. Fade up and down.
+						if(!stadILjusIsLoaded)
+						{
+							pulse.startDir=-1;
+							//ledSegSetFade(segmentTail,&fade);
+							ledSegSetPulse(segmentTail,&pulse);
+							ledSegSetPulseActiveState(segmentTail,true);
+							//ledSegSetFade(segmentArmLeft,&fade);
+							ledSegSetPulse(segmentArmLeft,&pulse);
+							ledSegSetPulseActiveState(segmentArmLeft,true);
+							stadILjusIsLoaded=true;
+						}
+						break;
+					}
+					case 5: //@When second verse starts
+					{
+						//Increase power slightly
+						if(!stadILjusIsLoaded)
+						{
+							globalSetting+=2;
+							apa102SetDefaultGlobal(globalSetting);
+							stadILjusIsLoaded=true;
+						}
+						break;
+					}
+					case 6: //@Start of second refrain
+					{
+						//Go to fade white glitter again, stronger yellow (same as 2). Bottom half.
+						//When done/waited for a bit, update state
+						if(!stadILjusIsLoaded)
+						{
+							stadILjusTime=systemTime+stadILjus2To3;
+							loadLedSegPulseColour(DISCO_COL_WHITE,&pulse);
+							pulse.mode = LEDSEG_MODE_GLITTER_LOOP_PERSIST;
+							pulse.startDir=1;
+							pulse.pixelTime=4000;
+							pulse.ledsMaxPower=300;
+							pulse.pixelsPerIteration=10;
+							//ledSegSetFade(segmentTail,&fade);
+							ledSegSetPulse(segmentTail,&pulse);
+							ledSegSetPulseActiveState(segmentTail,true);
+							stadILjusIsLoaded=true;
+						}
+						if(systemTime>stadILjusTime)
+						{
+							stadILjusState=7;
+							stadILjusIsLoaded=false;
+						}
+						break;
+					}
+					case 7: //@Automatic from state 6
+					{
+						//White glitter in top half and head, stronger yellow
+						if(!stadILjusIsLoaded)
+						{
+							stadILjusTime=systemTime+stadILjus2To3;
+							loadLedSegPulseColour(DISCO_COL_WHITE,&pulse);
+							pulse.mode = LEDSEG_MODE_GLITTER_LOOP_PERSIST;
+							pulse.startDir=1;
+							pulse.pixelTime=3000;
+							pulse.ledsMaxPower=300;
+							pulse.pixelsPerIteration=10;
+							//ledSegSetFade(segmentArmLeft,&fade);
+							ledSegSetPulse(segmentArmLeft,&pulse);
+							ledSegSetPulseActiveState(segmentArmLeft,true);
+							stadILjusIsLoaded=true;
+						}
+						break;
+					}
+					case 8: //@Crescendo!
+					{
+						//Fade to final colour
+						if(!stadILjusIsLoaded)
+						{
+							stadILjusTime=systemTime+stadILjusFinalFade;
+							globalSetting+=1;
+							apa102SetDefaultGlobal(globalSetting);
+							stadILjusIsLoaded=true;
+						}
+						if(systemTime>stadILjusTime && globalSetting < 15)
+						{
+							stadILjusTime=systemTime+stadILjusFinalFade;
+							globalSetting+=1;
+							apa102SetDefaultGlobal(globalSetting);
+						}
+						break;
+					}
+					default:
+					{
+						stadILjusState=0;
+						globalSetting=GLOBAL_SETTING;
+					}
 				}
 				break;
 			}

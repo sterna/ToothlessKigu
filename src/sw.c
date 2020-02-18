@@ -13,10 +13,11 @@ static bool getSwRaw(uint8_t sw);
 
 typedef struct
 {
-	uint8_t counter;
-	bool active;	//Indicates that the switch is currently active, and properly debounced
-	bool fallingEdgeActive;	//Indicates that a falling edge has happened. Will be reset once read.
-	bool risingEdgeActive;	//Indicates that a rising edge has happened. Will be reset once read.
+	uint8_t counter;				//Counter to keep track of debouncing
+	bool active;					//Indicates that the switch is currently active, and properly debounced
+	bool fallingEdgeActive;			//Indicates that a falling edge has happened. Will be reset once read.
+	bool risingEdgeActive;			//Indicates that a rising edge has happened. Will be reset once read.
+	uint32_t activationStartTime;	//Records the systemTime at which the switch had a rising edge
 }swState_t;
 
 static swState_t switches[SW_NOF_SWITCHES];
@@ -75,6 +76,7 @@ void swDebounceTask()
 				if(switches[i].active==false)
 				{
 					switches[i].risingEdgeActive = true;
+					switches[i].activationStartTime=systemTime;
 					switches[i].fallingEdgeActive = false;
 				}
 				switches[i].active=true;
@@ -85,6 +87,7 @@ void swDebounceTask()
 				{
 					switches[i].risingEdgeActive = false;
 					switches[i].fallingEdgeActive = true;
+					switches[i].activationStartTime=UINT32_MAX;
 				}
 				switches[i].active=false;
 			}
@@ -125,6 +128,28 @@ bool swGetFallingEdge(uint8_t sw)
 	bool tmp=switches[sw-1].fallingEdgeActive;
 	switches[sw-1].fallingEdgeActive=false;
 	return tmp;
+}
+
+
+/*
+ * Returns true if a switch has been active for more than ms milliseconds
+ * If true is ever returned, the state will be restarted treating it as if the switch has been released for a very short period of time
+ */
+bool swGetActiveForMoreThan(uint8_t sw, uint32_t ms)
+{
+	if(!swGetState(sw) || systemTime<ms)
+	{
+		return false;
+	}
+	else if((systemTime - ms) > switches[sw-1].activationStartTime)
+	{
+		switches[sw-1].activationStartTime=systemTime;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /*
