@@ -277,7 +277,6 @@ int main(int argc, char* argv[])
 	simpleModes_t smode=SMODE_RANDOM;
 	bool pulseIsActive=true;
 	bool pause=false;
-	uint32_t lightIntensitySettingTime=0;
 	uint32_t nextDiscoUpdate=0;
 	uint8_t modeChangeStage=0;
 	uint8_t stadILjusState=0;
