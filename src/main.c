@@ -17,6 +17,7 @@
 #include "extFetCtrl.h"
 #include "onboardLedCtrl.h"
 #include "adc.h"
+#include "powerManagement.h"
 
 bool poorMansOS();
 void poorMansOSRunAll();
@@ -203,8 +204,8 @@ int main(int argc, char* argv[])
 	SystemCoreClockUpdate();
 	timeInit();
 	swInit();
-	extFetInit();
-	onboardLedCtrlInit();
+	//extFetInit();
+	pwrMgtInit();
 	adcInit();
 	apa102SetDefaultGlobal(globalSetting);
 	apa102Init(1,500);
@@ -555,6 +556,14 @@ int main(int argc, char* argv[])
 			}
 			if(modeChangeStage<2)
 			{
+				if(smode==SMODE_OFF)
+				{
+					pwrMgtSetLEDPwr(255,false);
+				}
+				else
+				{
+					pwrMgtSetLEDPwr(255,true);
+				}
 				ledSegSetFade(segmentTail,&fade);
 				ledSegSetPulse(segmentTail,&pulse);
 				ledSegSetPulseActiveState(segmentTail,pulseIsActive);
@@ -624,6 +633,11 @@ int main(int argc, char* argv[])
 				stadILjusState++;
 				stadILjusIsLoaded=false;
 			}
+			else if(smode==SMODE_OFF)
+			{
+				//Toggle fan
+				pwrMgtToogleFan();
+			}
 			else
 			{
 				apa102SetDefaultGlobal(globalSetting*4);
@@ -647,6 +661,10 @@ int main(int argc, char* argv[])
 				ledSegSetPulseActiveState(segmentTail,false);
 				ledSegSetPulseActiveState(segmentArmLeft,false);
 				pause=false;
+				if(smode==SMODE_OFF)
+				{
+					pwrMgtSetLEDPwr(255,true);
+				}
 			}
 			else
 			{
@@ -655,6 +673,10 @@ int main(int argc, char* argv[])
 				ledSegSetPulseActiveState(segmentTail,true);
 				ledSegSetPulseActiveState(segmentArmLeft,true);
 				pause=true;
+				if(smode==SMODE_OFF)
+				{
+					pwrMgtSetLEDPwr(255,false);
+				}
 			}
 		}
 		//Change light intensity (global setting)
@@ -1253,7 +1275,7 @@ bool poorMansOS()
 			swDebounceTask();
 		break;
 		case 2:
-			dummyLedTask();
+			//dummyLedTask();
 		break;
 		default:
 		break;

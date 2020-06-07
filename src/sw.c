@@ -38,7 +38,7 @@ void swInit()
 	GPIOInitStruct.GPIO_Pin =  (1<<SW1_PIN) | (1<<SW2_PIN) | (1<<SW3_PIN) | (1<<SW4_PIN);
 	GPIO_Init(SW1_4_PORT,&GPIOInitStruct);
 
-	GPIOInitStruct.GPIO_Pin =  (1<<SW5_PIN) | (1<<SW6_PIN) | (1<<SW7_PIN);
+	GPIOInitStruct.GPIO_Pin =  (1<<SW7_PIN);
 	GPIO_Init(SW5_7_PORT,&GPIOInitStruct);
 
 	GPIOInitStruct.GPIO_Pin =  (1<<SW8_PIN);

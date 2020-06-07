@@ -9,6 +9,7 @@ C_SRCS += \
 ../src/ledPwm.c \
 ../src/main.c \
 ../src/onboardLedCtrl.c \
+../src/powerManagement.c \
 ../src/sw.c \
 ../src/uart.c 
 
@@ -18,6 +19,7 @@ OBJS += \
 ./src/ledPwm.o \
 ./src/main.o \
 ./src/onboardLedCtrl.o \
+./src/powerManagement.o \
 ./src/sw.o \
 ./src/uart.o 
 
@@ -27,6 +29,7 @@ C_DEPS += \
 ./src/ledPwm.d \
 ./src/main.d \
 ./src/onboardLedCtrl.d \
+./src/powerManagement.d \
 ./src/sw.d \
 ./src/uart.d 
 
