@@ -55,7 +55,6 @@
 */
 
 
-
 /*
  * Inits power management
  */
@@ -105,6 +104,35 @@ void pwrMgtToogleFan()
 }
 
 /*
+ * Gets the current state of if a strip has power
+ * If LESSEG_ALL is used, it will return true if any strip has power
+ */
+bool pwrMgtGetLedPwrState(uint8_t strip)
+{
+	bool tmp=false;
+	switch (strip)
+	{
+		case 1:
+		{
+			tmp=GPIO_ReadOutputDataBit(LED_PWR_PORT,LED_PWR_CH1_PIN);
+		}
+		break;
+		case 2:
+		{
+			tmp=GPIO_ReadOutputDataBit(LED_PWR_PORT,LED_PWR_CH1_PIN);
+			break;
+		}
+		case APA_ALL_STRIPS:
+		{
+			tmp=pwrMgtGetLedPwrState(1) || pwrMgtGetLedPwrState(2);
+			break;
+		}
+	//Note: Channel 3 cannot be turned off, since the logic uses that channel
+	}
+	return tmp;
+}
+
+/*
  * Sets the power to LED channels on/off
  */
 void pwrMgtSetLEDPwr(uint8_t strip, bool active)
@@ -124,7 +152,7 @@ void pwrMgtSetLEDPwr(uint8_t strip, bool active)
 			tmpSPI=APA2_SPI;
 		break;
 		}
-		case 255:
+		case APA_ALL_STRIPS:
 		{
 			pwrMgtSetLEDPwr(1,active);
 			pwrMgtSetLEDPwr(2,active);

@@ -48,5 +48,6 @@ void pwrMgtSetFan(bool active);
 void pwrMgtSetLEDPwr(uint8_t ch, bool active);
 void pwrMgtToogleFan();
 bool pwrMgtGetFanState();
+bool pwrMgtGetLedPwrState(uint8_t strip);
 
 #endif /* POWERMANAGEMENT_H_ */
