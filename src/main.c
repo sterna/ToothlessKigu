@@ -129,15 +129,23 @@ void handleApplicationSimple()
 	static bool pulseIsActive=true;
 	static bool pause=false;
 	static uint32_t nextDiscoUpdate=0;
-	static uint8_t modeChangeStage=0;
 	static uint8_t stadILjusState=0;
 	static uint32_t stadILjusTime=0;
 	static bool stadILjusIsLoaded=false;
 	static bool isPulseMode=false;
 
+	static volatile uint16_t startTmp=361;
+	static volatile uint16_t stopTmp=362;
+	static volatile uint8_t segTmp=0;
+	static volatile uint8_t globalTmp=GLOBAL_SETTING;
+	static volatile RGB_t rgbTmp={100,100,100};
+
+	//Eyes are located as LED 54 and 55, if counted including one sacrificial LED on the head. Eyes are at 361 and 362, if connected after upper body (no extra LED)
+	//Arm ends at 310. This last LED is the same as the next LED (as per standard). Use a sacrificial LED here and index Head from 311.
+
 	if(!setupDone)
 	{
-		animLoadLedSegPulseColour(SIMPLE_COL_RED,&pulse,255);
+		animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 		pulse.cycles =0;
 		pulse.ledsFadeAfter = 0;
 		pulse.ledsFadeBefore = 5;
@@ -149,7 +157,7 @@ void handleApplicationSimple()
 		pulse.startLed = 1;
 		pulse.globalSetting=0;
 		pulse.rainbowColour=false;
-		animLoadLedSegFadeColour(SIMPLE_COL_PURPLE,&fade,100,200);
+		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fade,100,255);
 		fade.cycles =0;
 		fade.mode = LEDSEG_MODE_BOUNCE;
 		fade.startDir = -1;
@@ -160,18 +168,21 @@ void handleApplicationSimple()
 	//	pulse.ledsMaxPower = 100;
 	//	pulse.pixelsPerIteration = 10;
 	//	pulse.pixelTime = 2000;
-		segmentTopFull=ledSegInitSegment(2,1,350,false,&pulse,&fade);
+		segmentTopFull=ledSegInitSegment(2,1,370,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
 		//segmentArmLeft=ledSegInitSegment(2,1,350,&pulse,&fade);
 		//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		setupDone=true;
+
+		segTmp=segmentTopFull;
 	}
 	//Change mode
-	if(swGetFallingEdge(1) || modeChangeStage)
+	if(swGetFallingEdge(1))
 	{
+		pause=false;	//Turn off pause if this button is pressed (or shit might be weird)
 		bool fadeAlreadySet=false;
 		bool pulseAlreadySet=false;
-		pulseIsActive=true;
+		//pulseIsActive=true;
 		//Handles if something needs to be done when changing from a state
 		switch(smode)
 		{
@@ -205,9 +216,19 @@ void handleApplicationSimple()
 			case SMODE_WHITE_FADE_RAINBOW_PULSE:
 			{
 				pulse.rainbowColour=false;
-				pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
-				pulse.pixelsPerIteration=3;
-				pulse.ledsMaxPower = 20;
+				if(isPulseMode)
+				{
+					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
+					pulse.pixelsPerIteration=3;
+					pulse.ledsMaxPower = 20;
+				}
+				else
+				{
+					pulse.ledsMaxPower = 150;
+					pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
+					pulse.pixelTime = 2000;
+					pulse.pixelsPerIteration = 5;
+				}
 				break;
 			}
 			default:
@@ -296,7 +317,13 @@ void handleApplicationSimple()
 				{
 					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
 					pulse.pixelsPerIteration=2;
-					pulse.ledsMaxPower = 50;
+					pulse.ledsMaxPower = 80;
+				}
+				else
+				{
+					pulse.ledsMaxPower = 250;
+					pulse.pixelTime = 2000;
+					pulse.pixelsPerIteration = 10;
 				}
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 				break;
@@ -424,6 +451,10 @@ void handleApplicationSimple()
 			//Toggle fan
 			pwrMgtToogleFan();
 		}
+		else if(pause)
+		{
+			ledSegSetRangeWithGlobal(segTmp,startTmp,stopTmp,rgbTmp.r,rgbTmp.g,rgbTmp.b,globalTmp);
+		}
 		else
 		{
 			apa102SetDefaultGlobal(globalSetting*4);
@@ -440,11 +471,11 @@ void handleApplicationSimple()
 	//Set lights on/off
 	if(swGetFallingEdge(3))
 	{
-		if(pause)
+		if(!pause)
 		{
 			ledSegSetFadeActiveState(LEDSEG_ALL,false);
 			ledSegSetPulseActiveState(LEDSEG_ALL,false);
-			pause=false;
+			pause=true;
 			if(smode==SMODE_OFF)
 			{
 				pwrMgtSetLEDPwr(APA_ALL_STRIPS,true);
@@ -454,7 +485,7 @@ void handleApplicationSimple()
 		{
 			ledSegSetFadeActiveState(LEDSEG_ALL,true);
 			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
-			pause=true;
+			pause=false;
 			if(smode==SMODE_OFF)
 			{
 				pwrMgtSetLEDPwr(APA_ALL_STRIPS,false);
@@ -779,6 +810,7 @@ bool poorMansOS()
 		break;
 		case 3:
 			animTask();
+		break;
 		default:
 		break;
 	}
