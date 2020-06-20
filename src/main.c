@@ -45,6 +45,7 @@ typedef enum
 	SMODE_BLUE_TO_RED_NO_PULSE,
 	SMODE_BLUE_TO_RED_GREEN_PULSE,
 	SMODE_CYAN_TO_RED_NO_PULSE,
+	SMODE_WHITE_FADE_RAINBOW_PULSE,
 	SMODE_RANDOM,
 	SMODE_DISCO,
 	SMODE_PRIDE_WHEEL,
@@ -61,7 +62,7 @@ uint8_t getBatteryLevel(uint8_t channel);
 void handleApplicationSimple();
 
 //Sets if the program goes into the staff
-#define GLOBAL_SETTING	6	//6 Todo: Pimped slightly for EF. My big battery should be fine
+#define GLOBAL_SETTING		6
 #define INTENSITY_CHANGE_PERIOD			1000
 #define GLITTER_TO_PULSE_CHANGE_TIME	5000
 
@@ -124,7 +125,7 @@ void handleApplicationSimple()
 	static ledSegmentPulseSetting_t pulse;
 	static ledSegmentFadeSetting_t fade;
 	//This is a loop for a simple user interface, with not as much control
-	static simpleModes_t smode=SMODE_RANDOM;
+	static simpleModes_t smode=SMODE_BLUE_TO_RED_GREEN_PULSE;
 	static bool pulseIsActive=true;
 	static bool pause=false;
 	static uint32_t nextDiscoUpdate=0;
@@ -147,6 +148,7 @@ void handleApplicationSimple()
 		pulse.startDir =1;
 		pulse.startLed = 1;
 		pulse.globalSetting=0;
+		pulse.rainbowColour=false;
 		animLoadLedSegFadeColour(SIMPLE_COL_PURPLE,&fade,100,200);
 		fade.cycles =0;
 		fade.mode = LEDSEG_MODE_BOUNCE;
@@ -190,6 +192,7 @@ void handleApplicationSimple()
 			{
 				//Restore power to LEDs
 				pwrMgtSetLEDPwr(APA_ALL_STRIPS,true);
+				fade.cycles=0;
 				break;
 			}
 			case SMODE_STAD_I_LJUS:
@@ -197,6 +200,14 @@ void handleApplicationSimple()
 				//Reset fade and pulse speeds to normal
 				pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
 				fade.fadeTime=FADE_NORMAL_TIME;
+				break;
+			}
+			case SMODE_WHITE_FADE_RAINBOW_PULSE:
+			{
+				pulse.rainbowColour=false;
+				pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
+				pulse.pixelsPerIteration=3;
+				pulse.ledsMaxPower = 20;
 				break;
 			}
 			default:
@@ -276,6 +287,19 @@ void handleApplicationSimple()
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
+			case SMODE_WHITE_FADE_RAINBOW_PULSE:
+				animSetModeChange(SIMPLE_COL_WHITE,&fade,LEDSEG_ALL,false,100,255);
+				fadeAlreadySet=true;
+				pulseIsActive=true;
+				pulse.rainbowColour=true;
+				if(isPulseMode)
+				{
+					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
+					pulse.pixelsPerIteration=2;
+					pulse.ledsMaxPower = 50;
+				}
+				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
+				break;
 			case SMODE_DISCO:
 				pulse.pixelTime=PULSE_FAST_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
 				fade.fadeTime=FADE_FAST_TIME;	//The break is omitted by design, since SMODE_DISCO does the same thing as SMODE_RANDOM
@@ -304,6 +328,7 @@ void handleApplicationSimple()
 				fade.g_max=0;
 				fade.b_min=0;
 				fade.b_max=0;
+				fade.cycles=1;
 				pulse.r_max=0;
 				pulse.g_max=0;
 				pulse.b_max=0;
@@ -376,7 +401,7 @@ void handleApplicationSimple()
 			pulse.ledsFadeAfter = 10;
 			pulse.ledsFadeBefore = 10;
 			pulse.ledsMaxPower = 20;
-			pulse.pixelTime = 1;
+			pulse.pixelTime = PULSE_NORMAL_PIXEL_TIME;
 			pulse.pixelsPerIteration = 3;
 			pulse.startDir =1;
 			pulse.startLed = 1;
