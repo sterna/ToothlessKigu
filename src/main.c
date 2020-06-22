@@ -74,6 +74,7 @@ void handleApplicationSimple();
 uint8_t segmentArmLeft=0;
 uint8_t segmentArmRight=0;
 uint8_t segmentHead=0;
+uint8_t segmentEyes=0;
 uint8_t segmentTail=0;
 uint8_t segmentBatteryIndicator=0;
 uint8_t segmentLegRight=0;
@@ -115,6 +116,11 @@ int main(int argc, char* argv[])
 
 }	//End of main()
 
+#define STRIP_LEN_BOTTOM_FULL	385
+#define STPIP_LEN_TOP			309
+//Includes eyes
+#define STRIP_LEN_HEAD			52
+
 /*
  * General task for handling simple modes
  */
@@ -134,8 +140,8 @@ void handleApplicationSimple()
 	static bool stadILjusIsLoaded=false;
 	static bool isPulseMode=false;
 
-	static volatile uint16_t startTmp=361;
-	static volatile uint16_t stopTmp=362;
+	static volatile uint16_t startTmp=1;
+	static volatile uint16_t stopTmp=2;
 	static volatile uint8_t segTmp=0;
 	static volatile uint8_t globalTmp=GLOBAL_SETTING;
 	static volatile RGB_t rgbTmp={100,100,100};
@@ -163,23 +169,24 @@ void handleApplicationSimple()
 		fade.startDir = -1;
 		fade.fadeTime = 700;
 		fade.globalSetting=0;
-		segmentBottomFull=ledSegInitSegment(1,1,385,false,&pulse,&fade);
-	//	pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;	//This was nicer than bounce, for short glitter
-	//	pulse.ledsMaxPower = 100;
-	//	pulse.pixelsPerIteration = 10;
-	//	pulse.pixelTime = 2000;
-		segmentTopFull=ledSegInitSegment(2,1,370,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
+		fade.syncGroup=1;
+		segmentBottomFull=ledSegInitSegment(1,1,STRIP_LEN_BOTTOM_FULL,false,false,&pulse,&fade);
+		animLoadLedSegFadeColour(SIMPLE_COL_RED,&fade,100,255);
+		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
+		animLoadLedSegFadeColour(SIMPLE_COL_BLUE,&fade,100,255);
+		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
+		animLoadLedSegFadeColour(SIMPLE_COL_PURPLE,&fade,0,255);
+		segmentEyes=ledSegInitSegment(2,STPIP_LEN_TOP+STRIP_LEN_HEAD+1,STPIP_LEN_TOP+STRIP_LEN_HEAD+3,false,true,0,&fade); //Max: 350 (or actually less). 370 is for series with head
 		//segmentArmLeft=ledSegInitSegment(2,1,350,&pulse,&fade);
 		//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		setupDone=true;
 
-		segTmp=segmentTopFull;
+		segTmp=segmentEyes;
 	}
 	//Change mode
-	if(swGetFallingEdge(1))
+	if(swGetFallingEdge(1) && !pause)
 	{
-		pause=false;	//Turn off pause if this button is pressed (or shit might be weird)
 		bool fadeAlreadySet=false;
 		bool pulseAlreadySet=false;
 		//pulseIsActive=true;
@@ -247,31 +254,37 @@ void handleApplicationSimple()
 				animSetModeChange(SIMPLE_COL_BLUE,&fade,LEDSEG_ALL,true,50,200);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_CYAN_FADE_YLW_PULSE:
 				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_RED_FADE_YLW_PULSE:
 				animSetModeChange(SIMPLE_COL_RED,&fade,LEDSEG_ALL,true,50,200);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_YLW_FADE_PURPLE_PULSE:
 				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_YLW_FADE_GREEN_PULSE:
 				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_GREEN_FADE_PURPLE_PULSE:
 				animSetModeChange(SIMPLE_COL_GREEN,&fade,LEDSEG_ALL,true,50,200);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_CYAN_FADE_NO_PULSE:
 				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200);
@@ -298,8 +311,8 @@ void handleApplicationSimple()
 				animLoadLedSegFadeBetweenColours(SIMPLE_COL_BLUE,SIMPLE_COL_RED,&fade,200,200);
 				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0);
 				fadeAlreadySet=true;
-				pulseIsActive=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_CYAN_TO_RED_NO_PULSE:
 				animLoadLedSegFadeBetweenColours(SIMPLE_COL_CYAN,SIMPLE_COL_RED,&fade,200,200);
@@ -333,6 +346,7 @@ void handleApplicationSimple()
 			case SMODE_RANDOM:
 				animLoadLedSegFadeColour(SIMPLE_COL_RANDOM,&fade,150,250);
 				animLoadLedSegPulseColour(SIMPLE_COL_RANDOM,&pulse,255);
+				pulseIsActive=true;
 				break;
 			case SMODE_PRIDE_WHEEL:
 			{
@@ -475,6 +489,8 @@ void handleApplicationSimple()
 		{
 			ledSegSetFadeActiveState(LEDSEG_ALL,false);
 			ledSegSetPulseActiveState(LEDSEG_ALL,false);
+			ledSegSetFadeActiveState(segmentEyes,false);
+			ledSegSetPulseActiveState(segmentEyes,false);
 			pause=true;
 			if(smode==SMODE_OFF)
 			{
@@ -485,6 +501,8 @@ void handleApplicationSimple()
 		{
 			ledSegSetFadeActiveState(LEDSEG_ALL,true);
 			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
+			ledSegSetFadeActiveState(segmentEyes,true);
+			ledSegSetPulseActiveState(segmentEyes,pulseIsActive);
 			pause=false;
 			if(smode==SMODE_OFF)
 			{
