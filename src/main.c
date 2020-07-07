@@ -130,6 +130,13 @@ void handleApplicationSimple()
 
 	static ledSegmentPulseSetting_t pulse;
 	static ledSegmentFadeSetting_t fade;
+	static ledSegmentFadeSetting_t fadeEyes;
+	static bool pulseIsActiveSaved=true;
+	static uint32_t fadeTimeSaved=0;
+	static uint32_t fadeToZeroStartTime=0;
+	static bool lightIsActive=true;
+	static bool isFadingToBlack=false;
+
 	//This is a loop for a simple user interface, with not as much control
 	static simpleModes_t smode=SMODE_BLUE_TO_RED_GREEN_PULSE;
 	static bool pulseIsActive=true;
@@ -175,9 +182,10 @@ void handleApplicationSimple()
 		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
 		animLoadLedSegFadeColour(SIMPLE_COL_BLUE,&fade,100,255);
 		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
-		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fade,50,255);
+		memcpy(&fadeEyes,&fade,sizeof(ledSegmentFadeSetting_t));
+		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fadeEyes,50,255);
 		fade.syncGroup=0;
-		segmentEyes=ledSegInitSegment(2,STPIP_LEN_TOP+STRIP_LEN_HEAD+1,STPIP_LEN_TOP+STRIP_LEN_HEAD+3,false,true,0,&fade); //Max: 350 (or actually less). 370 is for series with head
+		segmentEyes=ledSegInitSegment(2,STPIP_LEN_TOP+STRIP_LEN_HEAD+1,STPIP_LEN_TOP+STRIP_LEN_HEAD+3,false,true,0,&fadeEyes); //Max: 350 (or actually less). 370 is for series with head
 		fade.syncGroup=1;
 		//segmentArmLeft=ledSegInitSegment(2,1,350,&pulse,&fade);
 		//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
@@ -253,65 +261,65 @@ void handleApplicationSimple()
 		switch(smode)
 		{
 			case SMODE_BLUE_FADE_YLW_PULSE:
-				animSetModeChange(SIMPLE_COL_BLUE,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_BLUE,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
 				pulseIsActive=true;
 				break;
 			case SMODE_CYAN_FADE_YLW_PULSE:
-				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
 				pulseIsActive=true;
 				break;
 			case SMODE_RED_FADE_YLW_PULSE:
-				animSetModeChange(SIMPLE_COL_RED,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_RED,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
 				pulseIsActive=true;
 				break;
 			case SMODE_YLW_FADE_PURPLE_PULSE:
-				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
 				pulseIsActive=true;
 				break;
 			case SMODE_YLW_FADE_GREEN_PULSE:
-				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 				pulseIsActive=true;
 				break;
 			case SMODE_GREEN_FADE_PURPLE_PULSE:
-				animSetModeChange(SIMPLE_COL_GREEN,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_GREEN,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
 				pulseIsActive=true;
 				break;
 			case SMODE_CYAN_FADE_NO_PULSE:
-				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
 			case SMODE_YLW_FADE_NO_PULSE:
-				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
 			case SMODE_RED_FADE_NO_PULSE:
-				animSetModeChange(SIMPLE_COL_RED,&fade,LEDSEG_ALL,true,50,200);
+				animSetModeChange(SIMPLE_COL_RED,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
 			case SMODE_BLUE_TO_RED_NO_PULSE:
 				animLoadLedSegFadeBetweenColours(SIMPLE_COL_BLUE,SIMPLE_COL_RED,&fade,200,200);
-				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0);
+				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0,false);
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
 			case SMODE_BLUE_TO_RED_GREEN_PULSE:
 				animLoadLedSegFadeBetweenColours(SIMPLE_COL_BLUE,SIMPLE_COL_RED,&fade,200,200);
-				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0);
+				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0,false);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 				pulseIsActive=true;
@@ -319,12 +327,12 @@ void handleApplicationSimple()
 			case SMODE_CYAN_TO_RED_NO_PULSE:
 				animLoadLedSegFadeBetweenColours(SIMPLE_COL_CYAN,SIMPLE_COL_RED,&fade,200,200);
 				fade.fadeTime=2*FADE_NORMAL_TIME;
-				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0);
+				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0,false);
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
 			case SMODE_WHITE_FADE_RAINBOW_PULSE:
-				animSetModeChange(SIMPLE_COL_WHITE,&fade,LEDSEG_ALL,false,100,255);
+				animSetModeChange(SIMPLE_COL_WHITE,&fade,LEDSEG_ALL,false,100,255,true);
 				fadeAlreadySet=true;
 				pulseIsActive=true;
 				pulse.rainbowColour=true;
@@ -375,7 +383,7 @@ void handleApplicationSimple()
 				pulse.r_max=0;
 				pulse.g_max=0;
 				pulse.b_max=0;
-				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0);
+				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0,false);
 				fadeAlreadySet=true;
 				break;
 			}
@@ -385,7 +393,7 @@ void handleApplicationSimple()
 				stadILjusState=1;
 				fade.cycles=0;
 				fade.startDir=-1;
-				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,false,100,200);
+				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,false,100,200,true);
 				fadeAlreadySet=true;
 				pulseIsActive=false;
 				break;
@@ -416,7 +424,8 @@ void handleApplicationSimple()
 			ledSegSetFadeActiveState(segmentTopFull,false);
 			displayBattery(1,segmentTopFull,batteryIndicatorStartLed);
 		}
-
+		//To ensure that the statemachine for fade to black/light is not fucked up
+		lightIsActive=true;
 	}	//End of change mode clause
 
 	//Switches between pulse mode and glitter mode
@@ -487,28 +496,45 @@ void handleApplicationSimple()
 	//Set lights on/off
 	if(swGetFallingEdge(3))
 	{
-		if(!pause)
+		if(!lightIsActive)
 		{
-			ledSegSetFadeActiveState(LEDSEG_ALL,false);
-			ledSegSetPulseActiveState(LEDSEG_ALL,false);
-			ledSegSetFadeActiveState(segmentEyes,false);
-			ledSegSetPulseActiveState(segmentEyes,false);
-			pause=true;
-			if(smode==SMODE_OFF)
+			static bool eyesActive=true;
+			if(eyesActive)
 			{
-				pwrMgtSetLEDPwr(APA_ALL_STRIPS,true);
+				animSetModeChange(SIMPLE_COL_OFF,&fadeEyes,segmentEyes,false,0,0,false);
+				eyesActive=false;
+			}
+			else
+			{
+				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fadeEyes,segmentEyes,false,0,0,false);
+				eyesActive=true;
 			}
 		}
 		else
 		{
-			ledSegSetFadeActiveState(LEDSEG_ALL,true);
-			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
-			ledSegSetFadeActiveState(segmentEyes,true);
-			ledSegSetPulseActiveState(segmentEyes,pulseIsActive);
-			pause=false;
-			if(smode==SMODE_OFF)
+			if(!pause)
 			{
-				pwrMgtSetLEDPwr(APA_ALL_STRIPS,false);
+				ledSegSetFadeActiveState(LEDSEG_ALL,false);
+				ledSegSetPulseActiveState(LEDSEG_ALL,false);
+				ledSegSetFadeActiveState(segmentEyes,false);
+				ledSegSetPulseActiveState(segmentEyes,false);
+				pause=true;
+				if(smode==SMODE_OFF)
+				{
+					pwrMgtSetLEDPwr(APA_ALL_STRIPS,true);
+				}
+			}
+			else
+			{
+				ledSegSetFadeActiveState(LEDSEG_ALL,true);
+				ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
+				ledSegSetFadeActiveState(segmentEyes,true);
+				ledSegSetPulseActiveState(segmentEyes,pulseIsActive);
+				pause=false;
+				if(smode==SMODE_OFF)
+				{
+					pwrMgtSetLEDPwr(APA_ALL_STRIPS,false);
+				}
 			}
 		}
 	}
@@ -522,8 +548,52 @@ void handleApplicationSimple()
 		}
 		apa102SetDefaultGlobal(globalSetting);
 	}
+	if(swGetRisingEdge(4))
+	{
+		//Measure the time of the press and connect to speed of fade
+		fadeToZeroStartTime=systemTime;
+	}
+	if(swGetFallingEdge(4))
+	{
+		if(lightIsActive)
+		{
+			//Save current state
+			pulseIsActiveSaved = pulseIsActive;
+			//Setup lights fade down
+			fadeTimeSaved=fade.fadeTime;
+			fade.fadeTime=systemTime-fadeToZeroStartTime;
+			animSetModeChange(SIMPLE_COL_OFF,&fade,LEDSEG_ALL,false,0,0,false);
+			pulseIsActive=false;
+			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
+			lightIsActive=false;
+			isFadingToBlack=true;
+		}
+		else
+		{
+			//Restore state and fade lights up
+			fade.fadeTime=systemTime-fadeToZeroStartTime;
+			animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,true,0,0,false);
+			lightIsActive=true;
+			isFadingToBlack=true;
+		}
+	}
 
 	//End of handling various switches
+
+	//Check if we're currently fading to/from black and if we're done
+	if(isFadingToBlack && ledSegGetFadeSwitchDone(LEDSEG_ALL))
+	{
+		isFadingToBlack=false;
+		if(lightIsActive)
+		{
+			//We faded from black, so restore the fade time and restore pulse.
+			fade.fadeTime=fadeTimeSaved;
+			animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,true,0,0,false);
+			pulseIsActive=pulseIsActiveSaved;
+			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
+			ledSegRestart(LEDSEG_ALL,false,true);
+		}
+	}
 
 	//Handle special modes
 	switch(smode)
