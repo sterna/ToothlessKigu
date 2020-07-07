@@ -175,8 +175,10 @@ void handleApplicationSimple()
 		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
 		animLoadLedSegFadeColour(SIMPLE_COL_BLUE,&fade,100,255);
 		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
-		animLoadLedSegFadeColour(SIMPLE_COL_PURPLE,&fade,0,255);
+		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fade,50,255);
+		fade.syncGroup=0;
 		segmentEyes=ledSegInitSegment(2,STPIP_LEN_TOP+STRIP_LEN_HEAD+1,STPIP_LEN_TOP+STRIP_LEN_HEAD+3,false,true,0,&fade); //Max: 350 (or actually less). 370 is for series with head
+		fade.syncGroup=1;
 		//segmentArmLeft=ledSegInitSegment(2,1,350,&pulse,&fade);
 		//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
@@ -350,7 +352,7 @@ void handleApplicationSimple()
 				break;
 			case SMODE_PRIDE_WHEEL:
 			{
-				fade.fadeTime=FADE_NORMAL_TIME;
+				fade.fadeTime=FADE_FAST_TIME;
 				animSetPrideWheel(&fade,LEDSEG_ALL);
 				pulseIsActive=false;
 				fadeAlreadySet=true;
