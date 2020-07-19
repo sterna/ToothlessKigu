@@ -44,7 +44,7 @@ typedef enum
 	SMODE_RED_FADE_NO_PULSE,
 	SMODE_BLUE_TO_RED_NO_PULSE,
 	SMODE_BLUE_TO_RED_GREEN_PULSE,
-	SMODE_CYAN_TO_RED_NO_PULSE,
+	SMODE_CYAN_TO_PURPLE_NO_PULSE,
 	SMODE_WHITE_FADE_RAINBOW_PULSE,
 	SMODE_RANDOM,
 	SMODE_DISCO,
@@ -68,6 +68,13 @@ void handleApplicationSimple();
 
 #define PULSE_FAST_PIXEL_TIME	1
 #define PULSE_NORMAL_PIXEL_TIME	2
+#define PULSE_PIXELS_PER_ITERATION_NORMAL	3
+#define PULSE_PIXELS_PER_ITERATION_FAST		6
+
+#define GLITTER_PIXELS_PER_ITERATION_NORMAL		5
+#define GLITTER_PIXELS_PER_ITERATION_FAST		10
+#define GLITTER_NORMAL_PIXEL_TIME		2000
+
 #define FADE_FAST_TIME		300
 #define FADE_NORMAL_TIME	700
 
@@ -164,13 +171,13 @@ void handleApplicationSimple()
 		pulse.ledsFadeBefore = 5;
 		pulse.ledsMaxPower = 150;
 		pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
-		pulse.pixelTime = 2000;
+		pulse.pixelTime = GLITTER_NORMAL_PIXEL_TIME;
 		pulse.pixelsPerIteration = 5;
 		pulse.startDir =1;
 		pulse.startLed = 1;
 		pulse.globalSetting=0;
 		pulse.rainbowColour=false;
-		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fade,100,255);
+		animLoadLedSegFadeColour(SIMPLE_COL_YELLOW,&fade,100,255);
 		fade.cycles =0;
 		fade.mode = LEDSEG_MODE_BOUNCE;
 		fade.startDir = -1;
@@ -178,20 +185,18 @@ void handleApplicationSimple()
 		fade.globalSetting=0;
 		fade.syncGroup=1;
 		segmentBottomFull=ledSegInitSegment(1,1,STRIP_LEN_BOTTOM_FULL,false,false,&pulse,&fade);
-		animLoadLedSegFadeColour(SIMPLE_COL_RED,&fade,100,255);
-		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
-		animLoadLedSegFadeColour(SIMPLE_COL_BLUE,&fade,100,255);
-		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,0,&fade); //Max: 350 (or actually less). 370 is for series with head
+		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
+		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
+
+		//Setup eyes
 		memcpy(&fadeEyes,&fade,sizeof(ledSegmentFadeSetting_t));
 		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fadeEyes,50,255);
-		fade.syncGroup=0;
+		fadeEyes.syncGroup=0;
 		segmentEyes=ledSegInitSegment(2,STPIP_LEN_TOP+STRIP_LEN_HEAD+1,STPIP_LEN_TOP+STRIP_LEN_HEAD+3,false,true,0,&fadeEyes); //Max: 350 (or actually less). 370 is for series with head
-		fade.syncGroup=1;
 		//segmentArmLeft=ledSegInitSegment(2,1,350,&pulse,&fade);
 		//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		setupDone=true;
-
 		segTmp=segmentEyes;
 	}
 	//Change mode
@@ -205,9 +210,18 @@ void handleApplicationSimple()
 		{
 			case SMODE_DISCO:
 			{
-				//Reset fade and pulse speeds to normal
-				pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
-				fade.fadeTime=FADE_NORMAL_TIME;
+				if(isPulseMode)
+				{
+					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
+					pulse.pixelsPerIteration = PULSE_PIXELS_PER_ITERATION_NORMAL;
+					fade.fadeTime=FADE_NORMAL_TIME;
+				}
+				else
+				{
+					pulse.pixelTime=GLITTER_NORMAL_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
+					pulse.pixelsPerIteration = GLITTER_PIXELS_PER_ITERATION_NORMAL;
+					fade.fadeTime=FADE_NORMAL_TIME;
+				}
 				break;
 			}
 			case SMODE_PRIDE_WHEEL:
@@ -293,8 +307,8 @@ void handleApplicationSimple()
 			case SMODE_GREEN_FADE_PURPLE_PULSE:
 				animSetModeChange(SIMPLE_COL_GREEN,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
-				animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
-				pulseIsActive=true;
+				//animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
+				pulseIsActive=false;
 				break;
 			case SMODE_CYAN_FADE_NO_PULSE:
 				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200,true);
@@ -324,8 +338,8 @@ void handleApplicationSimple()
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 				pulseIsActive=true;
 				break;
-			case SMODE_CYAN_TO_RED_NO_PULSE:
-				animLoadLedSegFadeBetweenColours(SIMPLE_COL_CYAN,SIMPLE_COL_RED,&fade,200,200);
+			case SMODE_CYAN_TO_PURPLE_NO_PULSE:
+				animLoadLedSegFadeBetweenColours(SIMPLE_COL_CYAN,SIMPLE_COL_PURPLE,&fade,200,200);
 				fade.fadeTime=2*FADE_NORMAL_TIME;
 				animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,false,0,0,false);
 				fadeAlreadySet=true;
@@ -351,8 +365,18 @@ void handleApplicationSimple()
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 				break;
 			case SMODE_DISCO:
-				pulse.pixelTime=PULSE_FAST_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
-				fade.fadeTime=FADE_FAST_TIME;	//The break is omitted by design, since SMODE_DISCO does the same thing as SMODE_RANDOM
+				if(isPulseMode)
+				{
+					pulse.pixelTime=PULSE_FAST_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
+					pulse.pixelsPerIteration = PULSE_PIXELS_PER_ITERATION_FAST;
+					fade.fadeTime=FADE_FAST_TIME;
+				}
+				else
+				{
+					pulse.pixelTime=PULSE_FAST_PIXEL_TIME;	//This is valid in glitter mode, as glitter mode will cap to the highest possible
+					pulse.pixelsPerIteration = GLITTER_PIXELS_PER_ITERATION_FAST;
+					fade.fadeTime=FADE_FAST_TIME;
+				}	//The break is omitted by design, since SMODE_DISCO does the same thing as SMODE_RANDOM
 			case SMODE_RANDOM:
 				animLoadLedSegFadeColour(SIMPLE_COL_RANDOM,&fade,150,250);
 				animLoadLedSegPulseColour(SIMPLE_COL_RANDOM,&pulse,255);
@@ -440,7 +464,7 @@ void handleApplicationSimple()
 			pulse.ledsFadeBefore = 5;
 			pulse.ledsMaxPower = 150;
 			pulse.pixelTime = 2000;
-			pulse.pixelsPerIteration = 5;
+			pulse.pixelsPerIteration = GLITTER_PIXELS_PER_ITERATION_NORMAL;
 			pulse.startDir =1;
 			pulse.startLed = 1;
 			isPulseMode=false;
@@ -454,7 +478,7 @@ void handleApplicationSimple()
 			pulse.ledsFadeBefore = 10;
 			pulse.ledsMaxPower = 20;
 			pulse.pixelTime = PULSE_NORMAL_PIXEL_TIME;
-			pulse.pixelsPerIteration = 3;
+			pulse.pixelsPerIteration = PULSE_PIXELS_PER_ITERATION_NORMAL;
 			pulse.startDir =1;
 			pulse.startLed = 1;
 			isPulseMode=true;
