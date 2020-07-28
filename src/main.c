@@ -180,7 +180,7 @@ void handleApplicationSimple()
 		pulse.startDir =1;
 		pulse.startLed = 1;
 		pulse.globalSetting=0;
-		pulse.rainbowColour=false;
+		pulse.colourSeqNum=0;
 		animLoadLedSegFadeColour(SIMPLE_COL_YELLOW,&fade,100,255);
 		fade.cycles =0;
 		fade.mode = LEDSEG_MODE_BOUNCE;
@@ -282,7 +282,8 @@ void handleApplicationSimple()
 			animSeqFillPoint(&pt,&fade,NULL,250,false,true,false);
 			animSeqAppendPoint(animSequence1,&pt);
 		}
-		pulse.rainbowColour=true;
+		pulse.colourSeqNum = PRIDE_COL_NOF_COLOURS;
+		pulse.colourSeqPtr = (RGB_t*)coloursPride;
 		animSeqFillPoint(&pt,NULL,&pulse,0,true,false,false);
 		animSeqAppendPoint(animSequence1,&pt);
 
@@ -298,7 +299,6 @@ void handleApplicationSimple()
 	{
 		bool fadeAlreadySet=false;
 		bool pulseAlreadySet=false;
-		//pulseIsActive=true;
 		//Handles if something needs to be done when changing from a state
 		switch(smode)
 		{
@@ -340,7 +340,7 @@ void handleApplicationSimple()
 			}
 			case SMODE_WHITE_FADE_RAINBOW_PULSE:
 			{
-				pulse.rainbowColour=false;
+				pulse.colourSeqNum=0;
 				if(isPulseMode)
 				{
 					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
@@ -377,40 +377,30 @@ void handleApplicationSimple()
 				animSetModeChange(SIMPLE_COL_BLUE,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
-				pulse.cycles=6;
-				pulse.mode=LEDSEG_MODE_GLITTER_LOOP_PERSIST;
 				pulseIsActive=true;
 				break;
 			case SMODE_CYAN_FADE_YLW_PULSE:
 				animSetModeChange(SIMPLE_COL_CYAN,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
-				pulse.cycles=5;
-				pulse.mode=LEDSEG_MODE_GLITTER_LOOP;
 				pulseIsActive=true;
 				break;
 			case SMODE_RED_FADE_YLW_PULSE:
 				animSetModeChange(SIMPLE_COL_RED,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
-				pulse.cycles=7;
-				pulse.mode=LEDSEG_MODE_GLITTER_BOUNCE;
 				pulseIsActive=true;
 				break;
 			case SMODE_YLW_FADE_PURPLE_PULSE:
 				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_PURPLE,&pulse,255);
-				pulse.cycles=3;
-				pulse.mode=LEDSEG_MODE_GLITTER_LOOP_END;
 				pulseIsActive=true;
 				break;
 			case SMODE_YLW_FADE_GREEN_PULSE:
 				animSetModeChange(SIMPLE_COL_YELLOW,&fade,LEDSEG_ALL,true,50,200,true);
 				fadeAlreadySet=true;
 				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
-				pulse.cycles=0;
-				pulse.mode=LEDSEG_MODE_GLITTER_BOUNCE;
 				pulseIsActive=true;
 				break;
 			case SMODE_GREEN_FADE_PURPLE_PULSE:
@@ -463,7 +453,8 @@ void handleApplicationSimple()
 				animSetModeChange(SIMPLE_COL_WHITE,&fade,LEDSEG_ALL,false,100,255,true);
 				fadeAlreadySet=true;
 				pulseIsActive=true;
-				pulse.rainbowColour=true;
+				pulse.colourSeqNum=PRIDE_COL_NOF_COLOURS;
+				pulse.colourSeqPtr=(RGB_t*)coloursPride;
 				if(isPulseMode)
 				{
 					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
