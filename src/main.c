@@ -49,6 +49,7 @@ typedef enum
 	SMODE_RANDOM,
 	SMODE_DISCO,
 	SMODE_PRIDE_WHEEL,
+	SMODE_PAN_WHEEL,
 	SMODE_BATTERY_DISP,
 	SMODE_OFF,
 	SMODE_STAD_I_LJUS,
@@ -140,11 +141,14 @@ void handleApplicationSimple()
 	static ledSegmentPulseSetting_t pulse;
 	static ledSegmentFadeSetting_t fade;
 	static ledSegmentFadeSetting_t fadeEyes;
+
+	//Used for fading to black
 	static bool pulseIsActiveSaved=true;
 	static uint32_t fadeTimeSaved=0;
 	static uint32_t fadeToZeroStartTime=0;
 	static bool lightIsActive=true;
 	static bool isFadingToBlack=false;
+	static bool savedActiveAnimSeqs[ANIM_SEQ_MAX_SEQS];
 
 	//This is a loop for a simple user interface, with not as much control
 	static simpleModes_t smode=SMODE_BLUE_TO_RED_GREEN_PULSE;
@@ -163,12 +167,19 @@ void handleApplicationSimple()
 	static volatile RGB_t rgbTmp={100,100,100};
 
 	static uint8_t animSequence1=0;
+	static uint8_t animSequenceRainbowFade=0;
+	static uint8_t animSequencePanFade=0;
 
 	//Eyes are located as LED 54 and 55, if counted including one sacrificial LED on the head. Eyes are at 361 and 362, if connected after upper body (no extra LED)
 	//Arm ends at 310. This last LED is the same as the next LED (as per standard). Use a sacrificial LED here and index Head from 311.
 
 	if(!setupDone)
 	{
+		for(uint8_t i=0;i<ANIM_SEQ_MAX_SEQS;i++)
+		{
+			savedActiveAnimSeqs[i]=false;
+		}
+
 		animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
 		pulse.cycles =0;
 		pulse.ledsFadeAfter = 0;
@@ -225,9 +236,6 @@ void handleApplicationSimple()
 			uint32_t waitReleaseTime;	//The time at which the next point shall be loaded
 			bool isFadingToNextPoint;	//Indicates if we're currently fading to the next point
 		}animSequence_t;
-
-
-
 		 *
 		 *	Pulse: Cycle between a few colours. Set it to run for 0 cycles, but with increasing speed
 		 *	Fade: Cycle between the rainbow colours. Set it to run for 1 cycle and switch at max. Use direction -1
@@ -293,6 +301,9 @@ void handleApplicationSimple()
 		setupDone=true;
 		segTmp=segmentEyes;
 		fade.syncGroup=1;
+
+		animSequenceRainbowFade=animGenerateFadeSequence(LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255);
+		animSequencePanFade=animGenerateFadeSequence(LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255);
 	}
 	//Change mode
 	if(swGetFallingEdge(1) && !pause)
@@ -321,7 +332,12 @@ void handleApplicationSimple()
 			case SMODE_PRIDE_WHEEL:
 			{
 				//Turn of pride-wheel
-				animSetPrideWheelState(false);
+				animSeqSetActive(animSequenceRainbowFade,false);
+				break;
+			}
+			case SMODE_PAN_WHEEL:
+			{
+				animSeqSetActive(animSequencePanFade,false);
 				break;
 			}
 			case SMODE_OFF:
@@ -489,8 +505,14 @@ void handleApplicationSimple()
 				break;
 			case SMODE_PRIDE_WHEEL:
 			{
-				fade.fadeTime=FADE_FAST_TIME;
-				animSetPrideWheel(&fade,LEDSEG_ALL);
+				animSeqSetRestart(animSequenceRainbowFade);
+				pulseIsActive=false;
+				fadeAlreadySet=true;
+				break;
+			}
+			case SMODE_PAN_WHEEL:
+			{
+				animSeqSetRestart(animSequencePanFade);
 				pulseIsActive=false;
 				fadeAlreadySet=true;
 				break;
@@ -698,6 +720,19 @@ void handleApplicationSimple()
 			animSetModeChange(SIMPLE_COL_OFF,&fade,LEDSEG_ALL,false,0,0,false);
 			pulseIsActive=false;
 			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
+			//Save and de-activete active animation sequences
+			for(uint8_t i=0;i<ANIM_SEQ_MAX_SEQS;i++)
+			{
+				if(animSeqIsActive(i))
+				{
+					savedActiveAnimSeqs[i]=true;
+					animSeqSetActive(i,false);
+				}
+				else
+				{
+					savedActiveAnimSeqs[i]=false;
+				}
+			}
 			lightIsActive=false;
 			isFadingToBlack=true;
 		}
@@ -706,6 +741,14 @@ void handleApplicationSimple()
 			//Restore state and fade lights up
 			fade.fadeTime=systemTime-fadeToZeroStartTime;
 			animSetModeChange(SIMPLE_COL_NO_CHANGE,&fade,LEDSEG_ALL,true,0,0,false);
+			//Save and de-activete active animation sequences
+			for(uint8_t i=0;i<ANIM_SEQ_MAX_SEQS;i++)
+			{
+				if(savedActiveAnimSeqs[i])
+				{
+					animSeqSetActive(i,true);
+				}
+			}
 			lightIsActive=true;
 			isFadingToBlack=true;
 		}
