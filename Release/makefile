@@ -9,13 +9,6 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/subdir.mk
--include ledSegment/stm32utils/system/src/stm32f1-stdperiph/subdir.mk
--include ledSegment/stm32utils/system/src/newlib/subdir.mk
--include ledSegment/stm32utils/system/src/diag/subdir.mk
--include ledSegment/stm32utils/system/src/cortexm/subdir.mk
--include ledSegment/stm32utils/system/src/cmsis/subdir.mk
--include ledSegment/stm32utils/src/subdir.mk
--include ledSegment/src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -63,7 +56,7 @@ all: GaurianMain.elf secondary-outputs
 GaurianMain.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -flto -fno-move-loop-invariants -Wall -Wextra  -g -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"GaurianMain.map" --specs=nano.specs -o "GaurianMain.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -flto -Wall -Wextra  -g -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"GaurianMain.map" --specs=nano.specs -o "GaurianMain.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
