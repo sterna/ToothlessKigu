@@ -200,39 +200,47 @@ void handleApplicationSimple()
 		pulse.globalSetting=0;
 		pulse.colourSeqNum=0;
 		animLoadLedSegFadeColour(SIMPLE_COL_YELLOW,&fade,100,255);
-		fade.cycles =0;
+		fade.cycles=0;
 		fade.mode = LEDSEG_MODE_BOUNCE;
 		fade.startDir = -1;
 		fade.fadeTime = 700;
 		fade.globalSetting=0;
-		fade.syncGroup=1;
+		fade.syncGroup=0;
 		//segmentBottomFull=ledSegInitSegment(1,1,STRIP_LEN_BOTTOM_FULL,false,false,&pulse,&fade);
 
 		//TOdo: Test ledseg cycle counter etc
+		fade.syncGroup=2;
 		pulse.mode=LEDSEG_MODE_LOOP_END;
-		pulse.ledsMaxPower=5;
-		pulse.ledsFadeBefore=3;
+		pulse.ledsMaxPower=4;
+		pulse.ledsFadeBefore=5;
 		pulse.ledsFadeAfter=3;
 		pulse.pixelsPerIteration =1;
-		pulse.pixelTime=5;
-		pulse.cycles=5;
+		pulse.pixelTime=3;
+		pulse.cycles=0;
+		pulse.startDir=-1;
+		pulse.startLed = -5;
 		segmentTest1=ledSegInitSegment(1,1,19,false,true,&pulse,&fade);
 		animLoadLedSegFadeColour(SIMPLE_COL_BLUE,&fade,100,255);
 		animLoadLedSegPulseColour(SIMPLE_COL_RED,&pulse,255);
 		pulse.mode = LEDSEG_MODE_LOOP;
-		pulse.cycles=3;
+//		pulse.cycles=9;
+		pulse.startLed = -3;
 		segmentTest2=ledSegInitSegment(1,20,39,false,true,&pulse,&fade);
 		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fade,100,255);
 		animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
 		pulse.mode = LEDSEG_MODE_BOUNCE;
-		pulse.cycles=10;
+		pulse.pixelTime=1;
+		//pulse.pixelsPerIteration=1;
+//		pulse.cycles=10;
+		pulse.startLed = 5;
 		segmentTest3=ledSegInitSegment(1,40,59,false,true,&pulse,&fade);
 		animLoadLedSegFadeColour(SIMPLE_COL_PURPLE,&fade,100,255);
 		animLoadLedSegPulseColour(SIMPLE_COL_CYAN,&pulse,255);
 		pulse.mode = LEDSEG_MODE_BOUNCE;
-		pulse.cycles=10;
+//		pulse.cycles=10;
+		pulse.startLed = 5;
 		segmentTest4=ledSegInitSegment(1,60,80,false,true,&pulse,&fade);
-
+		fade.syncGroup=1;
 
 		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
 		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
