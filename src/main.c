@@ -46,6 +46,7 @@ typedef enum
 	SMODE_BLUE_TO_RED_GREEN_PULSE,
 	SMODE_CYAN_TO_PURPLE_NO_PULSE,
 	SMODE_WHITE_FADE_RAINBOW_PULSE,
+	SMODE_WHITE_FADE_PAN_PULSE,
 	SMODE_RANDOM,
 	SMODE_DISCO,
 	SMODE_PRIDE_WHEEL,
@@ -90,6 +91,12 @@ uint8_t segmentLegLeft=0;
 uint8_t segmentBottomFull=0;
 uint8_t segmentTopFull=0;
 uint8_t globalSetting=GLOBAL_SETTING;
+
+uint8_t segmentTest1=0;
+uint8_t segmentTest2=0;
+uint8_t segmentTest3=0;
+uint8_t segmentTest4=0;
+
 volatile uint16_t batteryIndicatorStartLed=151;	//There are 156 and 157 LEDs on each side
 
 /*
@@ -199,7 +206,34 @@ void handleApplicationSimple()
 		fade.fadeTime = 700;
 		fade.globalSetting=0;
 		fade.syncGroup=1;
-		segmentBottomFull=ledSegInitSegment(1,1,STRIP_LEN_BOTTOM_FULL,false,false,&pulse,&fade);
+		//segmentBottomFull=ledSegInitSegment(1,1,STRIP_LEN_BOTTOM_FULL,false,false,&pulse,&fade);
+
+		//TOdo: Test ledseg cycle counter etc
+		pulse.mode=LEDSEG_MODE_LOOP_END;
+		pulse.ledsMaxPower=5;
+		pulse.ledsFadeBefore=3;
+		pulse.ledsFadeAfter=3;
+		pulse.pixelsPerIteration =1;
+		pulse.pixelTime=5;
+		pulse.cycles=5;
+		segmentTest1=ledSegInitSegment(1,1,19,false,true,&pulse,&fade);
+		animLoadLedSegFadeColour(SIMPLE_COL_BLUE,&fade,100,255);
+		animLoadLedSegPulseColour(SIMPLE_COL_RED,&pulse,255);
+		pulse.mode = LEDSEG_MODE_LOOP;
+		pulse.cycles=3;
+		segmentTest2=ledSegInitSegment(1,20,39,false,true,&pulse,&fade);
+		animLoadLedSegFadeColour(SIMPLE_COL_WHITE,&fade,100,255);
+		animLoadLedSegPulseColour(SIMPLE_COL_YELLOW,&pulse,255);
+		pulse.mode = LEDSEG_MODE_BOUNCE;
+		pulse.cycles=10;
+		segmentTest3=ledSegInitSegment(1,40,59,false,true,&pulse,&fade);
+		animLoadLedSegFadeColour(SIMPLE_COL_PURPLE,&fade,100,255);
+		animLoadLedSegPulseColour(SIMPLE_COL_CYAN,&pulse,255);
+		pulse.mode = LEDSEG_MODE_BOUNCE;
+		pulse.cycles=10;
+		segmentTest4=ledSegInitSegment(1,60,80,false,true,&pulse,&fade);
+
+
 		segmentTopFull=ledSegInitSegment(2,1,STPIP_LEN_TOP,false,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
 		segmentHead=ledSegInitSegment(2,STPIP_LEN_TOP+1,STPIP_LEN_TOP+1+STRIP_LEN_HEAD-2,false,false,&pulse,&fade); //Max: 350 (or actually less). 370 is for series with head
 
@@ -212,38 +246,8 @@ void handleApplicationSimple()
 		//segmentTail=ledSegInitSegment(1,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 		//segmentArmLeft=ledSegInitSegment(2,1,185,&pulse,&fade);	//Todo: change back number to the correct number (150-isch)
 
-		//Test for animation sequence
-		/*
-		 * 	ledSegmentFadeSetting_t fade;	//The fade setting used for this specific point
-			ledSegmentPulseSetting_t pulse;	//The fade setting used for this specific point
-			uint32_t waitAfter;				//The time the final state (after both fade/pulse is done) shall persist (in ms)
-			uint8_t fadeMinScale;
-			uint8_t fadeMaxScale;
-			uint8_t pulseMaxScale;
-			bool switchAtMax;
-			bool fadeToNext;				//Indicates if we should fade into the next point or not
-		}animSeqPoint_t;
-
-		typedef struct
-		{
-			animSeqPoint_t points[ANIM_SEQ_MAX_POINTS];	//A list of the animation points used for this animation sequence
-			uint8_t currentPoint;	//The current point of animation we're one
-			uint8_t nofPoints;
-			uint32_t cycles;		//The number of cycles the animation shall run for. If cycles = 0 from the start, it will loop indefinitely
-			uint8_t seg;			//Segment to run this animation sequence on. If isSyncGroup is true, this is instead the sync group
-			bool isSyncGroup;		//Indicates if sync group is used
-			bool isActive;			//Indicates if this sequence is currently running (this means that the current pulse and fade will run until done)
-			uint32_t waitReleaseTime;	//The time at which the next point shall be loaded
-			bool isFadingToNextPoint;	//Indicates if we're currently fading to the next point
-		}animSequence_t;
-		 *
-		 *	Pulse: Cycle between a few colours. Set it to run for 0 cycles, but with increasing speed
-		 *	Fade: Cycle between the rainbow colours. Set it to run for 1 cycle and switch at max. Use direction -1
-		 *	Wait after:
-		 */
+		//Setup animations
 		animSeqPoint_t pt;
-		uint8_t i=0;
-		prideCols_t colIndex=PRIDE_COL_RED;
 		//General settings:
 		//Pulse
 
@@ -302,8 +306,8 @@ void handleApplicationSimple()
 		segTmp=segmentEyes;
 		fade.syncGroup=1;
 
-		animSequenceRainbowFade=animGenerateFadeSequence(LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255);
-		animSequencePanFade=animGenerateFadeSequence(LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255);
+		animSequenceRainbowFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255);
+		animSequencePanFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255);
 	}
 	//Change mode
 	if(swGetFallingEdge(1) && !pause)
@@ -355,6 +359,24 @@ void handleApplicationSimple()
 				break;
 			}
 			case SMODE_WHITE_FADE_RAINBOW_PULSE:
+			{
+				pulse.colourSeqNum=0;
+				if(isPulseMode)
+				{
+					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
+					pulse.pixelsPerIteration=3;
+					pulse.ledsMaxPower = 20;
+				}
+				else
+				{
+					pulse.ledsMaxPower = 150;
+					pulse.mode = LEDSEG_MODE_GLITTER_BOUNCE;
+					pulse.pixelTime = 10000;
+					pulse.pixelsPerIteration = 15;
+				}
+				break;
+			}
+			case SMODE_WHITE_FADE_PAN_PULSE:
 			{
 				pulse.colourSeqNum=0;
 				if(isPulseMode)
@@ -469,13 +491,15 @@ void handleApplicationSimple()
 				animSetModeChange(SIMPLE_COL_WHITE,&fade,LEDSEG_ALL,false,100,255,true);
 				fadeAlreadySet=true;
 				pulseIsActive=true;
+				pulse.colourSeqLoops = 0;
 				pulse.colourSeqNum=PRIDE_COL_NOF_COLOURS;
 				pulse.colourSeqPtr=(RGB_t*)coloursPride;
 				if(isPulseMode)
 				{
 					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
 					pulse.pixelsPerIteration=2;
-					pulse.ledsMaxPower = 80;
+					pulse.ledsMaxPower = 250;
+					pulse.mode = LEDSEG_MODE_LOOP;
 				}
 				else
 				{
@@ -483,7 +507,27 @@ void handleApplicationSimple()
 					pulse.pixelTime = 2000;
 					pulse.pixelsPerIteration = 10;
 				}
-				animLoadLedSegPulseColour(SIMPLE_COL_GREEN,&pulse,255);
+				break;
+			case SMODE_WHITE_FADE_PAN_PULSE:
+				animSetModeChange(SIMPLE_COL_WHITE,&fade,LEDSEG_ALL,false,100,255,true);
+				fadeAlreadySet=true;
+				pulseIsActive=true;
+				pulse.colourSeqLoops = 3;
+				pulse.colourSeqNum=PAN_COL_NOF_COLOURS;
+				pulse.colourSeqPtr=(RGB_t*)coloursPan;
+				if(isPulseMode)
+				{
+					pulse.pixelTime=PULSE_NORMAL_PIXEL_TIME;
+					pulse.pixelsPerIteration=2;
+					pulse.ledsMaxPower = 200;
+					pulse.mode = LEDSEG_MODE_LOOP;
+				}
+				else
+				{
+					pulse.ledsMaxPower = 250;
+					pulse.pixelTime = 2000;
+					pulse.pixelsPerIteration = 10;
+				}
 				break;
 			case SMODE_DISCO:
 				if(isPulseMode)
@@ -635,7 +679,11 @@ void handleApplicationSimple()
 		{
 			apa102SetDefaultGlobal(globalSetting*4);
 			ledSegRestart(LEDSEG_ALL,true,true);
-			ledSegRestart(LEDSEG_ALL,true,true);
+			//Todo: Remove later
+			ledSegRestart(segmentTest1,true,true);
+			ledSegRestart(segmentTest2,true,true);
+			ledSegRestart(segmentTest3,true,true);
+			ledSegRestart(segmentTest4,true,true);
 			//Force update on all strips
 			apa102UpdateStrip(APA_ALL_STRIPS);
 		}
