@@ -136,6 +136,14 @@ int main(int argc, char* argv[])
 //Includes eyes
 #define STRIP_LEN_HEAD			52
 
+typedef enum
+{
+	BEAT_NOT_ACTIVE,
+	BEAT_RECORDING,
+	BEAT_RECORDING_FINISHED,
+	BEAT_ACTIVE,
+}beatModeState_t;
+const uint8_t beatModeMaxEvents=7;
 
 
 /*
@@ -158,7 +166,7 @@ void handleApplicationSimple()
 	static bool savedActiveAnimSeqs[ANIM_SEQ_MAX_SEQS];
 
 	//This is a loop for a simple user interface, with not as much control
-	static simpleModes_t smode=SMODE_BLUE_TO_RED_GREEN_PULSE;
+	static simpleModes_t smode=SMODE_DISCO;
 	static bool pulseIsActive=true;
 	static bool pause=false;
 	static uint32_t nextDiscoUpdate=0;
@@ -176,6 +184,11 @@ void handleApplicationSimple()
 	static uint8_t animSequence1=0;
 	static uint8_t animSequenceRainbowFade=0;
 	static uint8_t animSequencePanFade=0;
+
+	//Variables for beat control
+	static eventTimeList beatEvents;
+	static uint8_t beatAnimSequence=0;
+	static beatModeState_t beatMode=BEAT_NOT_ACTIVE;
 
 	//Eyes are located as LED 54 and 55, if counted including one sacrificial LED on the head. Eyes are at 361 and 362, if connected after upper body (no extra LED)
 	//Arm ends at 310. This last LED is the same as the next LED (as per standard). Use a sacrificial LED here and index Head from 311.
@@ -284,10 +297,10 @@ void handleApplicationSimple()
 		animLoadLedSegFadeBetweenColours(SIMPLE_COL_YELLOW,SIMPLE_COL_RED,&fade,yScale,rScale);
 
 		//Generate first point and anim seq
-		//colIndex=animLoadNextRainbowWheel(&fade,LEDSEG_MAX_SEGMENTS+1,colIndex);	//Using this to load the rainbow sequence. The loading will be performed, but not segment will be set.
+//		colIndex=animLoadNextRainbowWheel(&fade,LEDSEG_MAX_SEGMENTS+1,colIndex);	//Using this to load the rainbow sequence. The loading will be performed, but not segment will be set.
 		pulse.pixelsPerIteration = 2;
 //		pulse.pixelsPerIteration = 15;
-		animSeqFillPoint(&pt,&fade,NULL,250,false,true,false);
+		animSeqFillPoint(&pt,&fade,NULL,250,false,false,true,false);
 		animSequence1=animSeqInit(segmentTopFull,false,3,&pt,1);	//segmentTopFull
 		//Generate each point
 		for(uint8_t i=0;i<5;i++)
@@ -295,27 +308,35 @@ void handleApplicationSimple()
 			//yScale+=10;
 			rScale+=20;
 			animLoadLedSegFadeBetweenColours(SIMPLE_COL_YELLOW,SIMPLE_COL_RED,&fade,yScale,rScale);
-			//colIndex=animLoadNextRainbowWheel(&fade,LEDSEG_MAX_SEGMENTS+1,colIndex);
+//			colIndex=animLoadNextRainbowWheel(&fade,LEDSEG_MAX_SEGMENTS+1,colIndex);
 //			pulse.pixelsPerIteration+=1;
-			//pulse.pixelTime-=200;
+//			pulse.pixelTime-=200;
 			fade.fadeTime-=125;
-			animSeqFillPoint(&pt,&fade,NULL,250,false,true,false);
+			animSeqFillPoint(&pt,&fade,NULL,250,false,false,true,false);
 			animSeqAppendPoint(animSequence1,&pt);
 		}
 		pulse.colourSeqNum = PRIDE_COL_NOF_COLOURS;
 		pulse.colourSeqPtr = (RGB_t*)coloursPride;
-		animSeqFillPoint(&pt,NULL,&pulse,0,true,false,false);
+		animSeqFillPoint(&pt,NULL,&pulse,0,false,true,false,false);
 		animSeqAppendPoint(animSequence1,&pt);
 
-		animSeqSetRestart(animSequence1);
+		//animSeqSetRestart(animSequence1);
 		//Restore fade mode to bounce
 		fade.mode = LEDSEG_MODE_BOUNCE;
-		setupDone=true;
-		segTmp=segmentEyes;
 		fade.syncGroup=1;
+
+		//Allocate animation sequences
 
 		animSequenceRainbowFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255);
 		animSequencePanFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255);
+
+		//Load a dummy point to init and allocate an animation sequence for beat mode
+		beatAnimSequence=animSeqInit(LEDSEG_ALL,false,0,&pt,1);
+		animSeqSetActive(LEDSEG_ALL,false);
+
+		segTmp=segmentEyes;
+		setupDone=true;
+		fade.cycles=0;
 	}
 	//Change mode
 	if(swGetFallingEdge(1) && !pause)
@@ -412,6 +433,13 @@ void handleApplicationSimple()
 				//Do nothing for default
 			}
 		}
+
+		if(beatMode!=BEAT_NOT_ACTIVE)
+		{
+			beatMode=BEAT_NOT_ACTIVE;
+			animSeqSetActive(beatAnimSequence,false);
+		}
+
 		smode++;
 		if(smode>=SMODE_NOF_MODES)
 		{
@@ -681,6 +709,7 @@ void handleApplicationSimple()
 		}
 		else if(pause)
 		{
+			//Debug function to try out colours (only usable while in Debug)
 			ledSegSetRangeWithGlobal(segTmp,startTmp,stopTmp,rgbTmp.r,rgbTmp.g,rgbTmp.b,globalTmp);
 		}
 		else
@@ -694,10 +723,45 @@ void handleApplicationSimple()
 			ledSegRestart(segmentTest4,true,true);
 			//Force update on all strips
 			apa102UpdateStrip(APA_ALL_STRIPS);
+
+			//If we're in beat recording mode, record one event here. The event system will tell when we've gone over the number of allowed recordings
+			if(beatMode==BEAT_RECORDING)
+			{
+				if(eventTimedSendTrig(&beatEvents,true))
+				{
+					beatMode=BEAT_RECORDING_FINISHED;
+				}
+			}
 		}
 	}
 	if(swGetFallingEdge(2))
 	{
+		apa102SetDefaultGlobal(globalSetting);
+	}
+
+	//Enable beat detection mode
+	if(swGetActiveForMoreThan(2,GLITTER_TO_PULSE_CHANGE_TIME) || beatMode==BEAT_RECORDING_FINISHED)
+	{
+		//Start recording, if we're not already
+		if(beatMode==BEAT_NOT_ACTIVE || beatMode==BEAT_ACTIVE)
+		{
+			eventTimedInit(&beatEvents,true,beatModeMaxEvents,false);
+			beatMode=BEAT_RECORDING;
+			animSeqSetActive(beatAnimSequence,false);
+			ledSegSetFade(LEDSEG_ALL,&fade);
+			ledSegSetPulse(LEDSEG_ALL,&pulse);
+			ledSegSetPulseActiveState(LEDSEG_ALL,pulseIsActive);
+		}
+		//Recording finishes when switch is again held for a long time
+		else if(beatMode==BEAT_RECORDING || beatMode==BEAT_RECORDING_FINISHED)
+		{
+			eventTimedStopRecording(&beatEvents);
+			//Recording is finished, generate a sequence and start it
+			beatAnimSequence=animGenerateBeatSequence(beatAnimSequence,LEDSEG_ALL,0,0,eventTimeGetNofEventsRecorded(&beatEvents),&fade,&pulse,globalSetting*4,&beatEvents,false);
+			animSeqSetActive(LEDSEG_ALL,false);
+			animSeqSetRestart(beatAnimSequence);
+			beatMode=BEAT_ACTIVE;
+		}
 		apa102SetDefaultGlobal(globalSetting);
 	}
 	//Set lights on/off
