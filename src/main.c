@@ -300,7 +300,7 @@ void handleApplicationSimple()
 //		colIndex=animLoadNextRainbowWheel(&fade,LEDSEG_MAX_SEGMENTS+1,colIndex);	//Using this to load the rainbow sequence. The loading will be performed, but not segment will be set.
 		pulse.pixelsPerIteration = 2;
 //		pulse.pixelsPerIteration = 15;
-		animSeqFillPoint(&pt,&fade,NULL,250,false,false,true,false);
+		animSeqFillPoint(&pt,&fade,NULL,250,false,false,false,false,true,false);
 		animSequence1=animSeqInit(segmentTopFull,false,3,&pt,1);	//segmentTopFull
 		//Generate each point
 		for(uint8_t i=0;i<5;i++)
@@ -312,12 +312,12 @@ void handleApplicationSimple()
 //			pulse.pixelsPerIteration+=1;
 //			pulse.pixelTime-=200;
 			fade.fadeTime-=125;
-			animSeqFillPoint(&pt,&fade,NULL,250,false,false,true,false);
+			animSeqFillPoint(&pt,&fade,NULL,250,false,false,false,false,true,false);
 			animSeqAppendPoint(animSequence1,&pt);
 		}
 		pulse.colourSeqNum = PRIDE_COL_NOF_COLOURS;
 		pulse.colourSeqPtr = (RGB_t*)coloursPride;
-		animSeqFillPoint(&pt,NULL,&pulse,0,false,true,false,false);
+		animSeqFillPoint(&pt,NULL,&pulse,0,false,false,false,true,false,false);
 		animSeqAppendPoint(animSequence1,&pt);
 
 		//animSeqSetRestart(animSequence1);
@@ -327,8 +327,8 @@ void handleApplicationSimple()
 
 		//Allocate animation sequences
 
-		animSequenceRainbowFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255);
-		animSequencePanFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255);
+		animSequenceRainbowFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255,true);
+		animSequencePanFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255,true);
 
 		//Load a dummy point to init and allocate an animation sequence for beat mode
 		beatAnimSequence=animSeqInit(LEDSEG_ALL,false,0,&pt,1);
@@ -586,14 +586,16 @@ void handleApplicationSimple()
 			case SMODE_PRIDE_WHEEL:
 			{
 				animSeqSetRestart(animSequenceRainbowFade);
-				pulseIsActive=false;
+				//pulseIsActive=false;
+				pulseAlreadySet=true;
 				fadeAlreadySet=true;
 				break;
 			}
 			case SMODE_PAN_WHEEL:
 			{
 				animSeqSetRestart(animSequencePanFade);
-				pulseIsActive=false;
+				//pulseIsActive=false;
+				pulseAlreadySet=true;
 				fadeAlreadySet=true;
 				break;
 			}
