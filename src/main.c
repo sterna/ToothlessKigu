@@ -327,8 +327,8 @@ void handleApplicationSimple()
 
 		//Allocate animation sequences
 
-		animSequenceRainbowFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255,true);
-		animSequencePanFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255,true);
+		animSequenceRainbowFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PRIDE_COL_NOF_COLOURS,(RGB_t*)coloursPride,500,100,255,false);
+		animSequencePanFade=animGenerateFadeSequence(ANIM_SEQ_MAX_SEQS, LEDSEG_ALL,1,0,PAN_COL_NOF_COLOURS,(RGB_t*)coloursPan,500,100,255,false);
 
 		//Load a dummy point to init and allocate an animation sequence for beat mode
 		beatAnimSequence=animSeqInit(LEDSEG_ALL,false,0,&pt,1);
@@ -717,12 +717,12 @@ void handleApplicationSimple()
 		else
 		{
 			apa102SetDefaultGlobal(globalSetting*4);
-			ledSegRestart(LEDSEG_ALL,true,true);
+			ledSegRestart(LEDSEG_ALL,true,pulseIsActive);
 			//Todo: Remove later
-			ledSegRestart(segmentTest1,true,true);
-			ledSegRestart(segmentTest2,true,true);
-			ledSegRestart(segmentTest3,true,true);
-			ledSegRestart(segmentTest4,true,true);
+			ledSegRestart(segmentTest1,true,pulseIsActive);
+			ledSegRestart(segmentTest2,true,pulseIsActive);
+			ledSegRestart(segmentTest3,true,pulseIsActive);
+			ledSegRestart(segmentTest4,true,pulseIsActive);
 			//Force update on all strips
 			apa102UpdateStrip(APA_ALL_STRIPS);
 
@@ -733,6 +733,11 @@ void handleApplicationSimple()
 				{
 					beatMode=BEAT_RECORDING_FINISHED;
 				}
+			}
+			else if(beatMode==BEAT_ACTIVE)
+			{
+				//Todo:Check which beatsegment is currently active, and restart it
+				animSeqSetRestart(beatAnimSequence);
 			}
 		}
 	}
@@ -759,9 +764,22 @@ void handleApplicationSimple()
 		{
 			eventTimedStopRecording(&beatEvents);
 			//Recording is finished, generate a sequence and start it
-			beatAnimSequence=animGenerateBeatSequence(beatAnimSequence,LEDSEG_ALL,0,0,eventTimeGetNofEventsRecorded(&beatEvents),&fade,&pulse,globalSetting*4,&beatEvents,false);
-			animSeqSetActive(LEDSEG_ALL,false);
-			animSeqSetRestart(beatAnimSequence);
+			if(animSeqIsActive(animSequenceRainbowFade))
+			{
+				animSeqModifyToBeat(animSequenceRainbowFade,&beatEvents,false);
+				animSeqSetRestart(animSequenceRainbowFade);
+			}
+			else if(animSeqIsActive(animSequencePanFade))
+			{
+				animSeqModifyToBeat(animSequencePanFade,&beatEvents,false);
+				animSeqSetRestart(animSequencePanFade);
+			}
+			else
+			{
+				beatAnimSequence=animGenerateBeatSequence(beatAnimSequence,LEDSEG_ALL,0,0,eventTimeGetNofEventsRecorded(&beatEvents),&fade,&pulse,true,pulseIsActive,globalSetting*4,&beatEvents,false);
+				animSeqSetActive(LEDSEG_ALL,false);
+				animSeqSetRestart(beatAnimSequence);
+			}
 			beatMode=BEAT_ACTIVE;
 		}
 		apa102SetDefaultGlobal(globalSetting);
