@@ -17,33 +17,35 @@
 #define SW1_4_PORT			GPIOB
 #define SW1_4_PORT_REG 		SW1_4_PORT->IDR
 
+/*
+ * Switches are on
+ * SW1 - PB15
+ * SW2 - PB10
+ * SW3 - A3
+ * SW4 - C13
+ */
 
-//TODO: THIS IS INCORRECT AND SHOULD BE CHANGED
 
-#define SW1_PIN	9
-#define SW2_PIN	8
-#define SW3_PIN	7
-#define SW4_PIN	6
+#define SW1_PIN			15
+#define SW1_PORT 		GPIOB
+#define SW1_PORT_REG	SW1_PORT->IDR
 
-#define SW5_7_PORT			GPIOC
-#define SW5_7_PORT_REG 		SW5_7_PORT->IDR
+#define SW2_PIN			10
+#define SW2_PORT 		GPIOB
+#define SW2_PORT_REG	SW2_PORT->IDR
 
-#define SW5_PIN	13
-#define SW6_PIN	14
-#define SW7_PIN	15
+#define SW3_PIN			3
+#define SW3_PORT 		GPIOA
+#define SW3_PORT_REG	SW3_PORT->IDR
 
-#define SW8_PORT			GPIOB
-#define SW8_PORT_REG 		SW8_PORT->IDR
-#define SW8_PIN 10
+#define SW4_PIN			14
+#define SW4_PORT 		GPIOC
+#define SW4_PORT_REG	SW4_PORT->IDR
 
-#define SW1 (!(SW1_4_PORT_REG &(1<<SW1_PIN)))
-#define SW2 (!(SW1_4_PORT_REG &(1<<SW2_PIN)))
-#define SW3 (!(SW1_4_PORT_REG &(1<<SW3_PIN)))
-#define SW4 (!(SW1_4_PORT_REG &(1<<SW4_PIN)))
-#define SW5 (!(SW5_7_PORT_REG &(1<<SW5_PIN)))
-#define SW6 (!(SW5_7_PORT_REG &(1<<SW6_PIN)))
-#define SW7 (!(SW5_7_PORT_REG &(1<<SW7_PIN)))
-#define SW8 (!(SW8_PORT_REG &(1<<SW8_PIN)))
+#define SW1 (!(SW1_PORT_REG &(1<<SW1_PIN)))
+#define SW2 (!(SW2_PORT_REG &(1<<SW2_PIN)))
+#define SW3 (!(SW3_PORT_REG &(1<<SW3_PIN)))
+#define SW4 (!(SW4_PORT_REG &(1<<SW4_PIN)))
 
 #define SW_NOF_SWITCHES	4
 

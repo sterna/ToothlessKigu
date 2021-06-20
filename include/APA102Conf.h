@@ -17,7 +17,7 @@
 //The maximum numbers of LEDs per strip
 #define APA_MAX_NOF_LEDS 500
 //The number of strips (all these are handled in a hardcoded way)
-#define APA_NOF_STRIPS 2
+#define APA_NOF_STRIPS 1
 //Keyword to use when trying to adress all strips (might not work for all functions)
 #define APA_ALL_STRIPS 255
 //The max value for the colour scaling settings
@@ -25,7 +25,7 @@
 //THe maximum number of strip scaling used
 #define APA_SCALE_MAX_SEGMENTS	3
 //Enables/desiables sacling
-#define APA_ENABLE_SCALING
+//#define APA_ENABLE_SCALING
 
 //Hardware conf
 //Hardware settings for strip 1
@@ -45,19 +45,6 @@
 #define APA_SCK_PORT		GPIOB
 //Set REMAP_CONFIG to correct remap, if needed. Set to 0 if remap is not needed
 #define APA_REMAP_CONFIG	GPIO_Remap_SPI1
-
-//Start stop for the first scale in this strip
-//Note: Any LEDs not within any scale range will not be scaled
-//Settings for scaling strip1,segment1
-#define APA_SCALE1_START	153
-#define APA_SCALE1_STOP		377
-//Scale factors for colours. Value is 0 to 128	(to optimize scaling performance)
-#define APA_SCALE1_R		128
-#define APA_SCALE1_G		70
-#define APA_SCALE1_B		80
-#define APA_SCALE1			{APA_SCALE1_START,APA_SCALE1_STOP,APA_SCALE1_R,APA_SCALE1_G,APA_SCALE1_B}
-
-#define APA_SCALE			{APA_SCALE1}
 
 
 //Hardware settings for strip 2
@@ -99,6 +86,6 @@
 
 
 //Here, the totality of the led correction is documented
-#define APA_SCALE_ASSIGN {APA_SCALE}
+#define APA_SCALE_ASSIGN {0}
 
 #endif /* APA102CONF_H_ */

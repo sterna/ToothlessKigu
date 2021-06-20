@@ -29,20 +29,24 @@ void swInit()
 {
 	GPIO_InitTypeDef GPIOInitStruct;
 
-	utilSetClockGPIO(SW1_4_PORT,ENABLE);
-	utilSetClockGPIO(SW5_7_PORT,ENABLE);
-	utilSetClockGPIO(SW8_PORT,ENABLE);
+	utilSetClockGPIO(SW1_PORT,ENABLE);
+	utilSetClockGPIO(SW2_PORT,ENABLE);
+	utilSetClockGPIO(SW3_PORT,ENABLE);
+	utilSetClockGPIO(SW4_PORT,ENABLE);
 
 	GPIOInitStruct.GPIO_Mode = GPIO_Mode_IPU;
 	GPIOInitStruct.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIOInitStruct.GPIO_Pin =  (1<<SW1_PIN) | (1<<SW2_PIN) | (1<<SW3_PIN) | (1<<SW4_PIN);
-	GPIO_Init(SW1_4_PORT,&GPIOInitStruct);
+	GPIOInitStruct.GPIO_Pin =  (1<<SW1_PIN);
+	GPIO_Init(SW1_PORT,&GPIOInitStruct);
 
-	GPIOInitStruct.GPIO_Pin =  (1<<SW7_PIN);
-	GPIO_Init(SW5_7_PORT,&GPIOInitStruct);
+	GPIOInitStruct.GPIO_Pin =  (1<<SW2_PIN);
+	GPIO_Init(SW2_PORT,&GPIOInitStruct);
 
-	GPIOInitStruct.GPIO_Pin =  (1<<SW8_PIN);
-	GPIO_Init(SW8_PORT,&GPIOInitStruct);
+	GPIOInitStruct.GPIO_Pin =  (1<<SW3_PIN);
+	GPIO_Init(SW3_PORT,&GPIOInitStruct);
+
+	GPIOInitStruct.GPIO_Pin =  (1<<SW4_PIN);
+	GPIO_Init(SW4_PORT,&GPIOInitStruct);
 }
 
 /*
@@ -173,18 +177,18 @@ static bool getSwRaw(uint8_t sw)
 	case 4:
 		return SW4;
 		break;
-	case 5:
-		return SW5;
-		break;
-	case 6:
-		return SW6;
-		break;
-	case 7:
-		return SW7;
-		break;
-	case 8:
-		return SW8;
-		break;
+//	case 5:
+//		return SW5;
+//		break;
+//	case 6:
+//		return SW6;
+//		break;
+//	case 7:
+//		return SW7;
+//		break;
+//	case 8:
+//		return SW8;
+//		break;
 	default:
 		return false;
 		break;
